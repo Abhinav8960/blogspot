@@ -1,38 +1,39 @@
          <div class="header_main">
              <div class="container-fluid">
-                 <div class="logo"><a href="/"><img src="images/logo.png"></a></div>
+                 <div class="logo"><a href="/"><img src="{{ asset('images/logo.png') }}" alt="Logo"></a></div>
                  <div class="menu_main" style="display: flex; align-items: center; width: 100%;">
-                     <ul style="display: flex; list-style: none; margin: 0; padding: 0; width: 100%; justify-content: space-between;">
-                         <li class="active"><a href="/">Home</a></li>
+                     <ul style="display: flex; list-style: none; margin: 0; padding: 0 40px; width: 100%; justify-content: space-between; max-width: 1100px; margin: 0 auto;">
+                         <li class="active"><a href="{{ url('/') }}">Home</a></li>
                          <li><a href="{{ route('about') }}">About</a></li>
                          <li><a href="{{ route('blog') }}">Blog</a></li>
                          <li><a href="{{ route('contactus') }}">Contact us</a></li>
                          @if (Route::has('login'))
-                         @auth
-                         @if(!auth()->user()->isAdmin())
-                         <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
-                          @endif
-                         <li class="dropdown" style="position: relative;">
-                             <a href="#" class="dropdown-toggle">{{ Auth::user()->name }} </a>
-                             <ul class="dropdown-content">
-                                 <li><a href="{{ route('profile.show') }}">Profile</a></li>
-                                 @if(auth()->user()->isAdmin())
-                                 <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
-                                  @endif
-                                 <li class="divider"></li>
-                                 <li>
-                                     <form method="POST" action="{{ route('logout') }}">
-                                         @csrf
-                                         <button type="submit" class="logout-btn">Logout</button>
-                                     </form>
+                             @auth
+                                 @if(!auth()->user()->isAdmin())
+                                     <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
+                                 @endif
+                                 <li class="dropdown" style="position: relative;">
+                                     <a href="#" class="dropdown-toggle">{{ Auth::user()->name }}</a>
+                                     <ul class="dropdown-content" style="position: absolute; right: 0; z-index: 1000; min-width: 200px; background: #fff; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 5px 0;">
+                                        <li style="padding: 3px 0;"><a href="{{ route('profile.show') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-user"></i> Profile</a></li>
+                                        @if(auth()->user()->isAdmin())
+                                            <li style="padding: 3px 0;"><a href="{{ route('dashboard') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                        @endif
+                                        <li class="divider" style="height: 1px; background: #eee; margin: 5px 0;"></li>
+                                        <li style="padding: 3px 0;">
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <button type="submit" class="logout-btn" style="background: none; border: none; padding: 8px 20px; width: 100%; text-align: left; cursor: pointer; color: #333; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px; font-family: inherit; font-size: inherit;">
+                                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                                </button>
+                                            </form>
+                                        </li>
+                                     </ul>
                                  </li>
-                             </ul>
-                         </li>
-
-                         @else
-                         <li><a href="{{route('login')}}">Login</a></li>
-                         <li><a href="{{route('register')}}">Register</a></li>
-                         @endauth
+                             @else
+                                 <li><a href="{{ route('login') }}">Login</a></li>
+                                 <li><a href="{{ route('register') }}">Register</a></li>
+                             @endauth
                          @endif
                      </ul>
                  </div>
@@ -42,9 +43,52 @@
          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
          <!-- Custom dropdown styles -->
          <style>
+             /* Header Main Styles */
+             .header_main {
+                 position: relative;
+                 z-index: 1000; /* Ensure header is above other content */
+             }
+
              /* Reset any conflicting styles */
              .dropdown-content {
                  display: none;
+             }
+
+             /* Menu Main Styles */
+             .menu_main {
+                 position: relative;
+                 z-index: 1001; /* Ensure menu is above header */
+             }
+
+             .menu_main ul {
+                 display: flex;
+                 list-style: none;
+                 margin: 0;
+                 padding: 0 40px;
+                 width: 100%;
+                 justify-content: flex-start;
+                 max-width: 1100px;
+                 margin: 0 auto;
+                 gap: 15px;
+                 position: relative;
+                 z-index: 1002; /* Ensure menu items are clickable */
+             }
+
+             .menu_main ul li {
+                 margin: 0;
+                 padding: 0;
+                 position: relative;
+             }
+
+             .menu_main ul li a {
+                 display: block;
+                 padding: 15px 10px;
+                 text-decoration: none;
+                 color: white !important;
+                 white-space: nowrap;
+                 transition: all 0.3s ease;
+                 position: relative;
+                 z-index: 1003; /* Ensure links are clickable */
              }
 
              /* Dropdown container */
@@ -59,23 +103,19 @@
                  display: flex;
                  align-items: center;
                  gap: 5px;
-                 padding: 10px 15px;
-                 color: white;
+                 padding: 15px 10px;
+                 color: white !important;
+                 position: relative;
+                 z-index: 1004;
              }
 
              /* Dropdown content */
-             .dropdown {
-                 position: relative;
-                 display: inline-block;
-             }
-
              .dropdown-content {
                  display: none !important;
                  position: absolute;
                  right: 0;
                  top: 100%;
                  background-color: #fff;
-                 /* Default background */
                  min-width: 200px;
                  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
                  border-radius: 4px;
@@ -138,35 +178,6 @@
                  background-color: #444;
              }
 
-             .menu_main ul {
-                 display: flex;
-                 list-style: none;
-                 margin: 0;
-                 padding: 0 40px;
-                 width: 100%;
-                 justify-content: flex-start;
-                 max-width: 1100px;
-                 margin: 0 auto;
-                 gap: 15px;
-             }
-
-             .menu_main ul li {
-                 margin: 0;
-                 padding: 0;
-             }
-
-             .menu_main ul li a {
-                 display: block;
-                 padding: 15px 10px;
-                 text-decoration: none;
-                 color: inherit;
-                 white-space: nowrap;
-                 transition: all 0.3s ease;
-             }
-
-             .menu_main ul li a:hover {
-                 color: #007bff;
-             }
 
              .dropdown-content a:hover,
              .dropdown-content .logout-btn:hover {
