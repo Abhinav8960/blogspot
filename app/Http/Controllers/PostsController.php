@@ -20,11 +20,12 @@ class PostsController extends Controller
 
     public function create()
     {
-        $user_type = Auth::user()->user_type;
-        if ($user_type == 1) {
-            return view('home.addpostbyuser');
+        $user = Auth::user();
+        if ($user->is_admin == 1) {
+            return view('posts.create');
         }
-        return view('posts.create');
+
+        return view('home.addpostbyuser');
     }
 
     public function store(Request $request)
@@ -52,15 +53,15 @@ class PostsController extends Controller
 
         $post->save();
 
-        if ($user->user_type == 1) {
-            Alert::success('Congrates! You have added the post Successfully');
+        if ($user->is_admin == 1) {
             return redirect()
-                ->route('welcome');
+                ->route('posts.index')
+                ->with('success', 'Post created successfully');
         }
 
+        Alert::success('Congrates! You have added the post Successfully');
         return redirect()
-            ->route('posts.index')
-            ->with('success', 'Post created successfully');
+            ->route('welcome');
     }
 
     public function edit($id)

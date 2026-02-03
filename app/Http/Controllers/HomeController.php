@@ -12,14 +12,11 @@ class HomeController extends Controller
     public function index()
     {
         if (Auth::id()) {
-            $user_type = Auth::user()->user_type;
-            if ($user_type == 1) {
-                return view('dashboard');
-            } else if ($user_type == 2) {
+            $user = Auth::user();
+            if ($user->is_admin == 1) {
                 return view('admin.index');
-            } else {
-                return redirect()->back();
             }
+            return view('dashboard');
         }
     }
 

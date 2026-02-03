@@ -16,7 +16,6 @@ Route::get('/post', [HomeController::class, 'post'])->name('post');
 Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
 
 Route::get('/postdetails/{id}', [HomeController::class, 'postdetails'])->name('postdetails');
-Route::get('/postdetails/{id}', [HomeController::class, 'postdetails'])->name('postdetails');
 
 // Authentication routes
 require __DIR__ . '/auth.php';

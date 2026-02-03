@@ -2,27 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
-    //
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
+        $user = Auth::user();
 
-        $user_type = Auth::user()->user_type;
-
-        if ($user_type == 1) {  // 1 is user
-            return view('home.homepage');
-        } else if ($user_type == 2) {  // 2 is admin
+        if ($user->status == 10 && $user->is_admin) {
             return view('admin.index');
         }
-
-        return redirect()->route('login');
+        // return view('home.homepage');
+        return redirect()->route('home');
     }
 }

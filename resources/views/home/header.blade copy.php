@@ -14,7 +14,9 @@
                              <a href="#" class="dropdown-toggle">{{ Auth::user()->name }} </a>
                              <ul class="dropdown-content">
                                  <li><a href="{{ route('profile.show') }}">Profile</a></li>
+                                  @if(auth()->user()->isAdmin())
                                  <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                    @endif
                                  <li class="divider"></li>
                                  <li>
                                      <form method="POST" action="{{ route('logout') }}">

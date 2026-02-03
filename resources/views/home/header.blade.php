@@ -9,12 +9,16 @@
                          <li><a href="{{ route('contactus') }}">Contact us</a></li>
                          @if (Route::has('login'))
                          @auth
+                         @if(!auth()->user()->isAdmin())
                          <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
+                          @endif
                          <li class="dropdown" style="position: relative;">
                              <a href="#" class="dropdown-toggle">{{ Auth::user()->name }} </a>
                              <ul class="dropdown-content">
                                  <li><a href="{{ route('profile.show') }}">Profile</a></li>
+                                 @if(auth()->user()->isAdmin())
                                  <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                                  @endif
                                  <li class="divider"></li>
                                  <li>
                                      <form method="POST" action="{{ route('logout') }}">
