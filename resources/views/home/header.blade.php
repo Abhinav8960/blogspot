@@ -1,20 +1,6 @@
          <div class="header_main">
              <div class="container-fluid">
-                 <div style="text-align: center; width: 100%; padding: 20px 0 15px; background: transparent; margin-bottom: 20px; border-bottom: 2px solid rgba(255,255,255,0.1);">
-                     <a href="/" style="text-decoration: none; display: inline-block; transition: all 0.3s ease;">
-                        <div style="line-height: 1; position: relative; display: inline-block;">
-                            <span style="font-family: 'Poppins', sans-serif; font-size: 60px; font-weight: 800; color: #ffffff; text-transform: uppercase; letter-spacing: -1.5px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); position: relative; z-index: 2;">Blog</span>
-                            <span style="font-family: 'Poppins', sans-serif; font-size: 60px; font-weight: 800; background: linear-gradient(45deg, #66b2c5, #89d8fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-transform: uppercase; letter-spacing: -1.5px; position: relative; z-index: 2;">Spot</span>
-                            <div style="position: absolute; bottom: 5px; left: 0; right: 0; height: 15px; background: rgba(102, 178, 197, 0.2); filter: blur(10px); z-index: 1;"></div>
-                        </div>
-                        <div style="position: relative; margin-top: 10px;">
-                            <div style="height: 3px; width: 150px; background: linear-gradient(90deg, transparent, #66b2c5, #66b2c5, transparent); margin: 0 auto 15px; border-radius: 3px; box-shadow: 0 0 15px rgba(102, 178, 197, 0.7);"></div>
-                            <div style="font-family: 'Poppins', sans-serif; font-size: 13px; color: #b0b0b0; letter-spacing: 4px; text-transform: uppercase; font-weight: 300; text-shadow: 0 1px 2px rgba(0,0,0,0.3);">
-                                WRITE <span style="color: #66b2c5; margin: 0 5px;">•</span> SHARE <span style="color: #66b2c5; margin: 0 5px;">•</span> INSPIRE
-                            </div>
-                        </div>
-                     </a>
-                 </div>
+                  @include('home.logo')
                  <div class="menu_main" style="display: flex; align-items: center; width: 100%;">
                      <ul style="display: flex; list-style: none; margin: 0; padding: 0 40px; width: 100%; justify-content: space-between; max-width: 1100px; margin: 0 auto;">
                          <li class="active"><a href="{{ url('/') }}">Home</a></li>
@@ -22,32 +8,32 @@
                          <li><a href="{{ route('blog') }}">Blog</a></li>
                          <li><a href="{{ route('contactus') }}">Contact us</a></li>
                          @if (Route::has('login'))
-                             @auth
-                                 @if(!auth()->user()->isAdmin())
-                                     <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
+                         @auth
+                         @if(!auth()->user()->isAdmin())
+                         <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
+                         @endif
+                         <li class="dropdown" style="position: relative;">
+                             <a href="#" class="dropdown-toggle">{{ Auth::user()->name }}</a>
+                             <ul class="dropdown-content" style="position: absolute; right: 0; z-index: 1000; min-width: 200px; background: #fff; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 5px 0;">
+                                 <li style="padding: 3px 0;"><a href="{{ route('profile.show') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-user"></i> Profile</a></li>
+                                 @if(auth()->user()->isAdmin())
+                                 <li style="padding: 3px 0;"><a href="{{ route('dashboard') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                                  @endif
-                                 <li class="dropdown" style="position: relative;">
-                                     <a href="#" class="dropdown-toggle">{{ Auth::user()->name }}</a>
-                                     <ul class="dropdown-content" style="position: absolute; right: 0; z-index: 1000; min-width: 200px; background: #fff; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 5px 0;">
-                                        <li style="padding: 3px 0;"><a href="{{ route('profile.show') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-user"></i> Profile</a></li>
-                                        @if(auth()->user()->isAdmin())
-                                            <li style="padding: 3px 0;"><a href="{{ route('dashboard') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-                                        @endif
-                                        <li class="divider" style="height: 1px; background: #eee; margin: 5px 0;"></li>
-                                        <li style="padding: 3px 0;">
-                                            <form method="POST" action="{{ route('logout') }}">
-                                                @csrf
-                                                <button type="submit" class="logout-btn" style="background: none; border: none; padding: 8px 20px; width: 100%; text-align: left; cursor: pointer; color: #333; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px; font-family: inherit; font-size: inherit;">
-                                                    <i class="fas fa-sign-out-alt"></i> Logout
-                                                </button>
-                                            </form>
-                                        </li>
-                                     </ul>
+                                 <li class="divider" style="height: 1px; background: #eee; margin: 5px 0;"></li>
+                                 <li style="padding: 3px 0;">
+                                     <form method="POST" action="{{ route('logout') }}">
+                                         @csrf
+                                         <button type="submit" class="logout-btn" style="background: none; border: none; padding: 8px 20px; width: 100%; text-align: left; cursor: pointer; color: #333; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px; font-family: inherit; font-size: inherit;">
+                                             <i class="fas fa-sign-out-alt"></i> Logout
+                                         </button>
+                                     </form>
                                  </li>
-                             @else
-                                 <li><a href="{{ route('login') }}">Login</a></li>
-                                 <li><a href="{{ route('register') }}">Register</a></li>
-                             @endauth
+                             </ul>
+                         </li>
+                         @else
+                         <li><a href="{{ route('login') }}">Login</a></li>
+                         <li><a href="{{ route('register') }}">Register</a></li>
+                         @endauth
                          @endif
                      </ul>
                  </div>
@@ -60,7 +46,8 @@
              /* Header Main Styles */
              .header_main {
                  position: relative;
-                 z-index: 1000; /* Ensure header is above other content */
+                 z-index: 1000;
+                 /* Ensure header is above other content */
              }
 
              /* Reset any conflicting styles */
@@ -71,7 +58,8 @@
              /* Menu Main Styles */
              .menu_main {
                  position: relative;
-                 z-index: 1001; /* Ensure menu is above header */
+                 z-index: 1001;
+                 /* Ensure menu is above header */
              }
 
              .menu_main ul {
@@ -85,7 +73,8 @@
                  margin: 0 auto;
                  gap: 15px;
                  position: relative;
-                 z-index: 1002; /* Ensure menu items are clickable */
+                 z-index: 1002;
+                 /* Ensure menu items are clickable */
              }
 
              .menu_main ul li {
@@ -102,7 +91,8 @@
                  white-space: nowrap;
                  transition: all 0.3s ease;
                  position: relative;
-                 z-index: 1003; /* Ensure links are clickable */
+                 z-index: 1003;
+                 /* Ensure links are clickable */
              }
 
              /* Dropdown container */
