@@ -11,7 +11,7 @@
                          @auth
                          <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
                          <li class="dropdown" style="position: relative;">
-                             <a href="#" class="dropdown-toggle">{{ Auth::user()->name }} <i class="fas fa-caret-down"></i></a>
+                             <a href="#" class="dropdown-toggle">{{ Auth::user()->name }} </a>
                              <ul class="dropdown-content">
                                  <li><a href="{{ route('profile.show') }}">Profile</a></li>
                                  <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
@@ -24,8 +24,6 @@
                                  </li>
                              </ul>
                          </li>
-
-
 
                          @else
                          <li><a href="{{route('login')}}">Login</a></li>
@@ -42,7 +40,7 @@
          <style>
              /* Reset any conflicting styles */
              .dropdown-content {
-                 display: none; 
+                 display: none;
              }
 
              /* Dropdown container */
@@ -67,20 +65,30 @@
                  display: inline-block;
              }
 
-            .dropdown-content {
-    display: none;
-    position: absolute;
-    right: 0;
-    top: 100%;
-    background-color: #fff;
-    min-width: 200px;
-    box-shadow: 0px 8px 16px rgba(0,0,0,0.1);
-    z-index: 2000; /* increase */
-    border-radius: 4px;
-    padding: 10px 0;
-    margin: 5px 0 0 0;
-    list-style: none;
-}
+             .dropdown-content {
+                 display: none !important;
+                 position: absolute;
+                 right: 0;
+                 top: 100%;
+                 background-color: #fff;
+                 /* Default background */
+                 min-width: 200px;
+                 box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+                 border-radius: 4px;
+                 padding: 10px 0;
+                 list-style: none;
+                 z-index: 2000;
+                 opacity: 0;
+                 visibility: hidden;
+                 transition: opacity 0.2s, visibility 0.2s;
+             }
+
+             /* Show dropdown */
+             .dropdown-content.show {
+                 display: block !important;
+                 opacity: 1;
+                 visibility: visible;
+             }
 
              .menu_main ul li a {
                  color: white !important;
@@ -96,6 +104,7 @@
              .dropdown-content a,
              .dropdown-content .logout-btn {
                  color: #333;
+                 /* Default text color for light background */
                  padding: 8px 16px;
                  text-decoration: none;
                  display: block;
@@ -105,6 +114,24 @@
                  width: 100%;
                  cursor: pointer;
                  font-size: 14px;
+             }
+
+             /* Dark theme text color */
+             .dark-dropdown .dropdown-content a,
+             .dark-dropdown .dropdown-content .logout-btn {
+                 color: #fff !important;
+             }
+
+             .dropdown-content a:hover,
+             .dropdown-content .logout-btn:hover {
+                 color: #000 !important;
+                 background-color: #f5f5f5;
+             }
+
+             .dark-dropdown .dropdown-content a:hover,
+             .dark-dropdown .dropdown-content .logout-btn:hover {
+                 color: #fff !important;
+                 background-color: #444;
              }
 
              .menu_main ul {
@@ -159,27 +186,69 @@
              }
          </style>
          <script>
+             function updateDropdownTextColor(dropdown) {
+                 const content = dropdown.querySelector('.dropdown-content');
+                 if (!content) return;
+
+                 // Check if we're in dark mode (you might need to adjust this based on your theme)
+                 const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+                 if (isDark) {
+                     dropdown.classList.add('dark-dropdown');
+                     content.style.backgroundColor = '#333';
+                     content.querySelectorAll('a, .logout-btn').forEach(item => {
+                         item.style.color = '#fff';
+                     });
+                 } else {
+                     dropdown.classList.remove('dark-dropdown');
+                     content.style.backgroundColor = '#fff';
+                     content.querySelectorAll('a, .logout-btn').forEach(item => {
+                         item.style.color = '#333';
+                     });
+                 }
+             }
+
              document.addEventListener('DOMContentLoaded', function() {
+                 // Initialize all dropdowns
+                 document.querySelectorAll('.dropdown').forEach(dropdown => {
+                     updateDropdownTextColor(dropdown);
+                 });
+
+                 // Handle dropdown toggle
                  document.querySelectorAll('.dropdown-toggle').forEach(toggle => {
                      toggle.addEventListener('click', function(e) {
                          e.preventDefault();
                          e.stopPropagation();
-                         const content = this.nextElementSibling;
-                         const isVisible = content.style.display === 'block';
 
-                         // Close all other dropdowns
+                         const dropdown = this.closest('.dropdown');
+                         const content = dropdown.querySelector('.dropdown-content');
+                         const isVisible = content.classList.contains('show');
+
+                         // Close other dropdowns
                          document.querySelectorAll('.dropdown-content').forEach(menu => {
-                             if (menu !== content) menu.style.display = 'none';
+                             if (menu !== content) {
+                                 menu.classList.remove('show');
+                                 menu.style.display = 'none';
+                             }
                          });
 
-                         // Toggle current dropdown
-                         content.style.display = isVisible ? 'none' : 'block';
+                         if (isVisible) {
+                             content.classList.remove('show');
+                             content.style.display = 'none';
+                         } else {
+                             updateDropdownTextColor(dropdown);
+                             content.style.display = 'block';
+                             void content.offsetWidth; // force reflow
+                             content.classList.add('show');
+                         }
                      });
                  });
 
+                 // Close on outside click
                  document.addEventListener('click', function(e) {
                      if (!e.target.closest('.dropdown')) {
                          document.querySelectorAll('.dropdown-content').forEach(menu => {
+                             menu.classList.remove('show');
                              menu.style.display = 'none';
                          });
                      }
