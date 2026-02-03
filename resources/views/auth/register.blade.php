@@ -1,12 +1,14 @@
 <x-guest-layout>
-    <x-authentication-card>
-        <x-slot name="logo">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0" style="background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{{ asset('images/banner-bg.png') }}') no-repeat center center/cover fixed;">
+        <!-- Logo outside the card -->
+        <div class="w-full sm:max-w-md mb-8">
             <x-authentication-card-logo />
-        </x-slot>
+        </div>
 
-        <x-validation-errors class="mb-4" />
+        <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white bg-opacity-90 shadow-lg overflow-hidden sm:rounded-lg">
+            <x-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register') }}">
             @csrf
 
             <div>
@@ -60,6 +62,7 @@
                     {{ __('Register') }}
                 </x-button>
             </div>
-        </form>
-    </x-authentication-card>
+            </form>
+        </div>
+    </div>
 </x-guest-layout>
