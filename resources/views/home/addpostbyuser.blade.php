@@ -17,7 +17,7 @@
 
     <!-- post details section start -->
     <div class="post_details_section">
-        <div class="container mt-5 ">
+        <div class="container   ">
             <h1 class="post-title text-center mb-4">Add Post</h1>
 
             <div class="post-form-wrapper">
