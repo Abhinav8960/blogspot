@@ -6,3 +6,4 @@
 <script src="adminassets/vendor/jquery-validation/jquery.validate.min.js"></script>
 <script src="adminassets/js/charts-home.js"></script>
 <script src="adminassets/js/front.js"></script>
+<script src="{{ asset('adminassets/js/admin.js') }}"></script>

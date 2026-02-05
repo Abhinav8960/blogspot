@@ -15,9 +15,9 @@
         <!-- Sidebar Navigation end-->
         <div class="page-content">
             @include('admin.body')
-            
+              @include('admin.footer')
         </div>
-        @include('admin.footer')
+      
     </div>
     <!-- JavaScript files-->
     @include('admin.js')

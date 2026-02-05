@@ -1,1 +1,117 @@
-/* your styles go here */
+/* =========================
+   BASE RESET
+========================= */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+/* =========================
+   HEADER
+========================= */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;              /* header ki real height */
+    z-index: 1000;
+}
+
+/* =========================
+   MAIN LAYOUT WRAPPER
+========================= */
+.d-flex.align-items-stretch {
+    margin-top: 70px;          /* header ke neeche */
+    height: calc(100vh - 70px);
+    overflow: hidden;          /* sidebar/body overlap fix */
+}
+
+/* =========================
+   SIDEBAR
+========================= */
+#sidebar {
+    width: 250px;
+    min-width: 250px;
+    height: 100%;
+    overflow: hidden;          /* sidebar scroll OFF */
+    transition: width 0.3s ease;
+}
+
+/* =========================
+   PAGE CONTENT
+========================= */
+.page-content {
+    flex-grow: 1;
+    min-width: 0;              /* 🔥 flex overflow fix */
+    height: 100%;
+    overflow-y: auto;          /* sirf body scroll */
+    padding: 10px 20px;
+    transition: width 0.3s ease;
+}
+
+/* =========================
+   POSTS TITLE FIX
+========================= */
+.post_title {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 0;
+    padding: 10px 0;
+    color: #ffffff;
+}
+
+/* =========================
+   SIDEBAR COLLAPSE STATE
+========================= */
+#sidebar.active {
+    width: 80px;
+    min-width: 80px;
+}
+
+/* hide sidebar text */
+#sidebar.active .sidebar-header .title,
+#sidebar.active ul li span,
+#sidebar.active ul li a span {
+    display: none;
+}
+
+/* center icons */
+#sidebar.active ul li a {
+    text-align: center;
+    padding: 12px 0;
+}
+
+/* =========================
+   SIDEBAR TOGGLE BUTTON
+========================= */
+.sidebarCollapse {
+    background: transparent;
+    border: none !important;
+    outline: none !important;
+    box-shadow: none !important;   /* 🔥 white border remove */
+    color: #8a8d93;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 6px 10px;
+}
+
+/* icon color */
+.sidebarCollapse i {
+    color: #8a8d93;
+}
+
+/* hover */
+.sidebarCollapse:hover,
+.sidebarCollapse:hover i {
+    color: #6f7278;
+}
+
+/* focus / active (bootstrap override) */
+.sidebarCollapse:focus,
+.sidebarCollapse:active,
+.sidebarCollapse:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+    border: none !important;
+}
