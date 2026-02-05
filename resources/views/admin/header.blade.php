@@ -12,8 +12,35 @@
             </div>
             <div class="container-fluid d-flex align-items-center justify-content-between">
                 <div class="navbar-header">
-                    <!-- Navbar Header--><a href="index.html" class="navbar-brand">
-                        <div class="brand-text brand-big visible text-uppercase"><strong class="text-primary">BlogSpot</strong>&nbsp;<strong>Admin</strong></div>
+                    <!-- Navbar Header-->
+                    <a href="/dashboard" class="navbar-brand">
+                        <div class="brand-text brand-big visible text-uppercase">
+                            <div style="cursor:pointer; display:inline-flex; align-items:center; line-height:1;">
+                                <span style="
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #ffffff;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+    ">Blog</span>
+                                <span style="
+        font-family: 'Poppins', sans-serif;
+        font-size: 1.25rem;
+        font-weight: 800;
+        background: linear-gradient(45deg, #66b2c5, #89d8fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        text-transform: uppercase;
+        letter-spacing: -0.5px;
+    ">Spot</span>
+                            </div>
+
+                            <!-- <strong class="text-primary">BlogSpot</strong> -->
+                            &nbsp;<strong>Admin</strong>
+                        </div>
                         <div class="brand-text brand-sm"><strong class="text-primary">D</strong><strong>A</strong></div>
                     </a>
                     <!-- Sidebar Toggle Btn-->
@@ -139,8 +166,8 @@
                         </div>
                     </div>
                     <!-- Megamenu end     -->
-                     
-                    
+
+
                     <!-- Log out               -->
                     <div class="list-inline-item logout">
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">
