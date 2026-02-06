@@ -111,73 +111,79 @@
             font-size: 28px;
         }
     }
+
     /* Blog page background fix */
-.blog_section.home-blog-section {
-    background-color: #dfdfdf !important;
-}
+    .blog_section.home-blog-section {
+        background-color: #dfdfdf !important;
+    }
 
-/* Container ka white bg hatao (important) */
-.blog_section.home-blog-section .container {
-    background: transparent !important;
-}
- .post-title {
-            font-size: 36px;
-            font-weight: 700;
-        }
-        /* Form wrapper */
-        .post-form-wrapper {
-            max-width: 650px;
-            margin: 0 auto;
-        }
+    /* Container ka white bg hatao (important) */
+    .blog_section.home-blog-section .container {
+        background: transparent !important;
+    }
 
-        .post-form {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
-        }
+    .post-title {
+        font-size: 36px;
+        font-weight: 700;
+    }
 
-        /* Labels */
-        .post-form .form-label {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 6px;
-        }
+    /* Form wrapper */
+    .post-form-wrapper {
+        max-width: 650px;
+        margin: 0 auto;
+    }
 
-        /* Inputs & textarea */
-        .post-form .form-control,
-        .post-form .form-control-file {
-            border-radius: 8px;
-            border: 1px solid #ddd;
-            padding: 12px 14px;
-            font-size: 15px;
-            transition: all 0.3s ease;
-        }
+    .post-form {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+    }
 
-        .post-form .form-control:focus {
-            border-color: #f0ad4e;
-            box-shadow: 0 0 0 0.15rem rgba(240, 173, 78, 0.25);
-        }
+    /* Labels */
+    .post-form .form-label {
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 6px;
+    }
 
-        /* Spacing between fields */
-        .post-form .form-group {
-            margin-bottom: 20px;
-        }
+    /* Inputs & textarea */
+    .post-form .form-control,
+    .post-form .form-control-file {
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 12px 14px;
+        font-size: 15px;
+        transition: all 0.3s ease;
+    }
 
-        /* Submit button */
-        .post-form .btn-warning {
-            background: linear-gradient(135deg, #f0ad4e, #ec971f);
-            border: none;
-            padding: 12px 30px;
-            font-size: 16px;
-            font-weight: 600;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
+    .post-form .form-control:focus {
+        border-color: #f0ad4e;
+        box-shadow: 0 0 0 0.15rem rgba(240, 173, 78, 0.25);
+    }
 
-        .post-form .btn-warning:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(240, 173, 78, 0.4);
-        }
+    /* Spacing between fields */
+    .post-form .form-group {
+        margin-bottom: 20px;
+    }
 
+    /* Submit button */
+    .post-form .btn-warning {
+        background: linear-gradient(135deg, #f0ad4e, #ec971f);
+        border: none;
+        padding: 12px 30px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 30px;
+        transition: all 0.3s ease;
+    }
+
+    .post-form .btn-warning:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 15px rgba(240, 173, 78, 0.4);
+    }
+
+    .input-error {
+        border: 1px solid #dc3545 !important;
+    }
 </style>

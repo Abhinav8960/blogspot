@@ -55,10 +55,10 @@ class HomeController extends Controller
     public function Contactuscreate(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'email' => 'required',
-            'message' => 'required',
+            'name' => 'required|min:3',
+            'phone' => 'required|digits_between:10,12',
+            'email' => 'required|email',
+            'message' => 'required|min:10',
         ]);
 
         $contact = new Contact();
