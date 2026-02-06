@@ -37,8 +37,8 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>phone</th>
-                        <th>email</th>
+                        <th>Phone</th>
+                        <th>Email</th>
                         <th>Created At</th>
                         <th>Status</th>
                         <th>Actions</th>
@@ -83,6 +83,11 @@
                     @endforelse
                 </tbody>
             </table>
+
+
+            <div class="d-flex justify-content-center mt-4">
+                {{ $contacts->links() }}
+            </div>
 
 
         </div>

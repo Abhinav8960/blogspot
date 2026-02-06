@@ -29,13 +29,15 @@
             <div class="d-flex justify-content-between align-items-center">
 
                 <h1 class="post_title">Posts</h1>
-
                 <a href="{{ route('posts.create') }}" class="btn btn-primary  mt-3 mr-4">
                     Create Post
                 </a>
             </div>
 
+                 @include('posts.search')
 
+                
+ 
             <table class="table table-striped custom-table">
                 <thead class="thead-dark">
                     <tr>
@@ -88,12 +90,20 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="5" class="text-center">No posts found</td>
+                        <td colspan="5" class="text-center">No posts found
+                            @if(request('search'))
+                            for "{{ request('search') }}"
+                            @endif
+                        </td>
                     </tr>
                     @endforelse
                 </tbody>
             </table>
 
+
+            <div class="d-flex justify-content-center mt-4">
+                {{ $posts->links() }}
+            </div>
 
         </div>
 
@@ -107,18 +117,18 @@
             ev.preventDefault();
             let form = ev.target.closest('form');
             swal({
-                title: "Are you sure to delete this post ? ",
-                text: "You wont able to revert this action!",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
+                    title: "Are you sure to delete this post ? ",
+                    text: "You wont able to revert this action!",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
 
-            .then((willDelete) => {
-                if (willDelete) {
-                    form.submit();  
-                }
-            });
+                .then((willDelete) => {
+                    if (willDelete) {
+                        form.submit();
+                    }
+                });
         }
     </script>
 </body>

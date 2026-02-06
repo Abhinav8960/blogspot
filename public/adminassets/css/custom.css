@@ -48,6 +48,7 @@ html, body {
     overflow-y: auto;          /* sirf body scroll */
     padding: 10px 20px;
     transition: width 0.3s ease;
+    padding-bottom: 80px;
 }
 
 /* =========================
@@ -115,3 +116,136 @@ html, body {
     box-shadow: none !important;
     border: none !important;
 }
+
+
+
+
+.pagination .page-link {
+    background-color: #2b2d35;
+    border-color: #444;
+    color: #ddd;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #000;
+}
+
+.pagination .page-link:hover {
+    background-color: #3a3d47;
+    color: #fff;
+}
+
+
+
+.post_title {
+         font-size: 30px;
+         font-weight: bold;
+         text-align: left;
+         padding: 30px;
+         color: #ffffff;
+     }
+
+     /* Page background (grey) */
+ 
+
+/* Center wrapper */
+.post-form-wrapper {
+    max-width: 600px;
+    margin: 60px auto;              /* center horizontally + spacing from top */
+    background: #fafafa;            /* light grey (white se soft) */
+    padding: 25px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* Form labels */
+.post-form .form-label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #444;
+}
+
+/* Spacing between fields */
+.post-form .form-group {
+    margin-bottom: 18px;
+}
+
+/* Textarea behavior */
+.post-form textarea {
+    resize: vertical;
+}
+
+/* Inputs subtle background to match theme */
+.post-form .form-control,
+.post-form .form-control-file {
+    background-color: #fff;
+    border: 1px solid #ced4da;
+}
+
+/* Focus state */
+.post-form .form-control:focus {
+    border-color: #ffc107;          /* matches btn-warning */
+    box-shadow: none;
+}
+
+.contact-view-box {
+    background: linear-gradient(145deg, #1e1f25, #25262d);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+
+
+.post-form-wrapper {
+    max-width: 800px;
+    margin: 60px auto;
+    background: #fafafa;
+    padding: 5px 2px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.view-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #8a8d93;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+.view-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #eaeaea;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+    overflow-wrap: break-word;
+}
+
+
+.message-box {
+    white-space: pre-wrap;      /* line breaks + wrapping */
+    word-wrap: break-word;      /* old browsers */
+    overflow-wrap: break-word;  /* modern browsers */
+    word-break: break-word;     /* force break long words */
+    line-height: 1.7;
+    padding-top: 5px;
+    max-width: 100%;
+}
+
+.back-btn {
+    border-color: #8a8d93;
+    color: #8a8d93;
+    background: transparent;
+}
+
+.back-btn:hover {
+    background-color: #8a8d93;
+    color: #ffffff;
+    border-color: #8a8d93;
+}
+

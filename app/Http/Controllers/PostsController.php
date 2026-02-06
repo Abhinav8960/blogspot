@@ -10,10 +10,21 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class PostsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $posts = Post::latest()->get();
-        $posts = Post::all();
+        // $posts = Post::orderBy('id', 'desc')->paginate(10);
+        $query = Post::query();
+
+        if ($request->filled('search')) {
+            $query
+                ->where('title', 'like', '%' . $request->search . '%')
+                ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+
+        $posts = $query
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('posts.index', compact('posts'));
     }
