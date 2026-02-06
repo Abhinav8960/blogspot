@@ -31,6 +31,7 @@
                 <h1 class="post_title">Contact US</h1>
             </div>
 
+            @include('admin.contactus.search')
 
             <table class="table table-striped custom-table">
                 <thead class="thead-dark">

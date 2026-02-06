@@ -10,9 +10,23 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ContactUsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contacts = Contact::orderBy('id', 'desc')->paginate(10);
+        // $contacts = Contact::orderBy('id', 'desc')->paginate(10);
+
+        $query = Contact::query();
+
+        if ($request->filled('search')) {
+            $query
+                ->where('name', 'like', '%' . $request->search . '%')
+                ->orWhere('phone', 'like', '%' . $request->search . '%')
+                ->orWhere('email', 'like', '%' . $request->search . '%');
+        }
+
+        $contacts = $query
+            ->orderBy('id', 'desc')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('admin.contactus.index', compact('contacts'));
     }
