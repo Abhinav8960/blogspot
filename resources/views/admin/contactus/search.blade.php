@@ -1,31 +1,53 @@
-<form method="GET" action="{{ route('contactus.index') }}" class="mb-5">
-    <div class="row">
-        <div class="col-md-5">
-            <div class="input-group">
+ <form method="GET" action="{{ route('contactus.index') }}" class="mb-5">
+     <div class="row g-2">
 
-                <input type="text"
-                    name="search"
-                    class="form-control"
-                    placeholder="Search Contacts..."
-                    value="{{ request('search') }}">
+         <!-- Name -->
+         <div class="col-md-3">
+             <input type="text"
+                 name="name"
+                 class="form-control"
+                 placeholder="Search by Name"
+                 value="{{ request('name') }}">
+         </div>
 
-                @if(request('search'))
-                <div class="input-group-append">
-                    <a href="{{ route('contactus.index') }}"
-                        class="btn btn-outline-secondary"
-                        title="Clear search">
-                        <i class="fa fa-times"></i>
-                    </a>
-                </div>
-                @endif
+         <!-- Email -->
+         <div class="col-md-3">
+             <input type="text"
+                 name="email"
+                 class="form-control"
+                 placeholder="Search by Email"
+                 value="{{ request('email') }}">
+         </div>
 
-                <div class="input-group-append">
-                    <button class="btn btn-warning" type="submit">
-                        Search
-                    </button>
-                </div>
+         <!-- Phone -->
+         <div class="col-md-3">
+             <input type="text"
+                 name="phone"
+                 class="form-control"
+                 placeholder="Search by Phone"
+                 value="{{ request('phone') }}">
+         </div>
 
-            </div>
-        </div>
-    </div>
-</form>
+         <!-- Buttons -->
+         <div class="col-md-3 d-flex gap-2">
+             <div class="justify-content-between align-items-center">
+
+                 @if(request()->hasAny(['name','email','phone']))
+                 <a href="{{ route('contactus.index') }}"
+                     class="btn btn-outline-secondary"
+                     title="Clear search">
+                     Clear
+                 </a>
+                 @endif
+
+                 <button class="btn btn-warning" type="submit">
+                     Search
+                 </button>
+             </div>
+
+
+
+         </div>
+
+     </div>
+ </form>
