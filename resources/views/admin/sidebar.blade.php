@@ -11,9 +11,9 @@
             <ul class="list-unstyled">
                 <li class="active"><a href="{{ route('dashboard') }}"> <i class="icon-home"></i><span>DashBoard</span></a></li>
                 <li><a href="{{ route('posts.index') }}"> <i class="icon-grid"></i><span>Posts</span></a></li>
+                <li><a href="{{ route('contactus.index') }}"> <i class="icon-padnote"></i> <span>Forms</span> </a></li>
                 <li><a href="/"> <i class="icon-website"></i><span>View Website</span></a></li>
                 <li><a href="charts.html"> <i class="fa fa-bar-chart"></i><span>Charts</span></a></li>
-                <li><a href="forms.html"> <i class="icon-padnote"></i> <span>Forms</span> </a></li>
                 <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i><span>Example Dropdown</span></a>
                     <ul id="exampledropdownDropdown" class="collapse list-unstyled ">
                         <li><a href="#"><span>page</span></a></li>

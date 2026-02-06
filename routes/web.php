@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Auth;
@@ -12,10 +13,12 @@ Route::get('/home', [HomeController::class, 'homepage'])->name('home');
 
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-Route::get('/post', [HomeController::class, 'post'])->name('post');
-Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
 
+Route::get('/post', [HomeController::class, 'post'])->name('post');
 Route::get('/postdetails/{id}', [HomeController::class, 'postdetails'])->name('postdetails');
+
+Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
+Route::post('/contactus', [HomeController::class, 'Contactuscreate'])->name('Contactuscreate');
 
 // Authentication routes
 require __DIR__ . '/auth.php';
@@ -30,6 +33,15 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
     Route::post('/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{id}', [PostsController::class, 'delete'])->name('posts.delete');
+
+    Route::get('/admin/contactus', [ContactUsController::class, 'index'])
+        ->name('contactus.index');
+
+    Route::get('/admin/contactus/{id}', [ContactUsController::class, 'view'])
+        ->name('contactus.view');
+
+    Route::delete('/admin/contactus/{id}', [ContactUsController::class, 'delete'])
+        ->name('contactus.delete');
 
     // Add other protected routes here
 });

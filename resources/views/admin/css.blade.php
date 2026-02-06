@@ -75,4 +75,58 @@
     box-shadow: none;
 }
 
+.contact-view-box {
+    background: linear-gradient(145deg, #1e1f25, #25262d);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.05);
+}
+
+
+
+.post-form-wrapper {
+    max-width: 800px;
+    margin: 60px auto;
+    background: #fafafa;
+    padding: 5px 2px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.view-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: #8a8d93;
+    margin-bottom: 6px;
+    letter-spacing: 1px;
+}
+
+.view-value {
+    font-size: 16px;
+    font-weight: 500;
+    color: #eaeaea;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed rgba(255,255,255,0.15);
+}
+
+.message-box {
+    white-space: pre-line;
+    line-height: 1.7;
+    padding-top: 5px;
+}
+
+.back-btn {
+    border-color: #8a8d93;
+    color: #8a8d93;
+    background: transparent;
+}
+
+.back-btn:hover {
+    background-color: #8a8d93;
+    color: #ffffff;
+    border-color: #8a8d93;
+}
+
+
  </style>
