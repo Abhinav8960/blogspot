@@ -1,7 +1,11 @@
          <div class="header_main">
              <div class="container-fluid">
-                  @include('home.logo')
-                 <div class="menu_main" style="display: flex; align-items: center; width: 100%;">
+                 @include('home.logo')
+                 <!-- Hamburger Icon -->
+                 <div class="hamburger-btn">
+                     <i class="fas fa-bars"></i>
+                 </div>
+                 <div class="menu_main">
                      <ul style="display: flex; list-style: none; margin: 0; padding: 0 40px; width: 100%; justify-content: space-between; max-width: 1100px; margin: 0 auto;">
                          <li class="active"><a href="{{ url('/') }}">Home</a></li>
                          <li><a href="{{ route('about') }}">About</a></li>
@@ -62,19 +66,13 @@
                  /* Ensure menu is above header */
              }
 
-             .menu_main ul {
-                 display: flex;
-                 list-style: none;
-                 margin: 0;
-                 padding: 0 40px;
-                 width: 100%;
-                 justify-content: flex-start;
-                 max-width: 1100px;
-                 margin: 0 auto;
-                 gap: 15px;
+
+             .menu_main {
                  position: relative;
-                 z-index: 1002;
-                 /* Ensure menu items are clickable */
+                 z-index: 1001;
+                 display: flex;
+                 align-items: center;
+                 width: 100%;
              }
 
              .menu_main ul li {
@@ -203,6 +201,68 @@
              .logout-btn {
                  text-align: left !important;
              }
+
+             /* Hide hamburger in desktop */
+             .hamburger-btn {
+                 display: none;
+                 font-size: 24px;
+                 color: #fff;
+                 cursor: pointer;
+             }
+
+             /* ===================== */
+             /* MOBILE RESPONSIVE FIX */
+             /* ===================== */
+
+             @media (max-width: 768px) {
+
+                 .header_main .container-fluid {
+                     display: flex;
+                     flex-direction: column;
+                     position: relative;
+                 }
+
+                 .hamburger-btn {
+                     display: block;
+                     position: absolute;
+                     right: 20px;
+                     top: 20px;
+                     z-index: 3000;
+                 }
+
+                 .menu_main {
+                     display: none;
+                     width: 100%;
+                     background: #000;
+                 }
+
+                 .menu_main.open {
+                     display: block;
+                 }
+
+                 .menu_main ul {
+                     flex-direction: column !important;
+                     padding: 0 20px !important;
+                     gap: 0 !important;
+                 }
+
+                 .menu_main ul li {
+                     width: 100%;
+                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                 }
+
+                 .menu_main ul li a {
+                     padding: 15px 0 !important;
+                     width: 100%;
+                 }
+
+                 .dropdown-content {
+                     position: static !important;
+                     width: 100%;
+                     box-shadow: none !important;
+                     border-radius: 0 !important;
+                 }
+             }
          </style>
          <script>
              function updateDropdownTextColor(dropdown) {
@@ -272,5 +332,15 @@
                          });
                      }
                  });
+
+                 // Mobile Hamburger Toggle
+                 const hamburger = document.querySelector('.hamburger-btn');
+                 const menuMain = document.querySelector('.menu_main');
+
+                 if (hamburger) {
+                     hamburger.addEventListener('click', function() {
+                         menuMain.classList.toggle('open');
+                     });
+                 }
              });
          </script>
