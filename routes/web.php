@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Payments\RazorpayController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
@@ -42,6 +43,17 @@ Route::middleware(['auth'])->group(function () {
 
     Route::delete('/admin/contactus/{id}', [ContactUsController::class, 'delete'])
         ->name('contactus.delete');
+
+    Route::get('/razorpay', [RazorpayController::class, 'index'])->name('razorpay.index');
+    Route::post('/razorpay/payment', [RazorpayController::class, 'payment'])->name('razorpay.payment');
+    Route::get('/razorpay/callback', [RazorpayController::class, 'callback'])->name('razorpay.callback');
+    Route::get('/payment-success', function () {
+        return view('payments.success');
+    })->name('payment.success');
+
+    Route::get('/payment-failed', function () {
+        return view('payments.failed');
+    })->name('payment.failed');
 
     // Add other protected routes here
 });
