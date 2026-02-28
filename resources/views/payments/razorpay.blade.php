@@ -6,19 +6,30 @@
     @include('home.homecss')
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
-        /* ===== Section wrapper — same as contact_section ===== */
+        :root {
+            --navy: #1a1a2e;
+            --red: #e74c3c;
+            --red-dark: #c0392b;
+            --bg: #dfdfdf;
+            --card-bg: #fff;
+            --text-muted: #8a8fa8;
+            --border: #e2e5ef;
+            --input-bg: #f7f8fc;
+        }
+
+        /* ===== Section wrapper — SAME as original ===== */
         .payment_section {
             padding: 80px 0 80px 0;
-            background: #dfdfdf;
+            background: var(--bg);
         }
 
         /* ===== Heading ===== */
         .payment_taital {
             font-family: 'Righteous', cursive;
             font-size: 38px;
-            font-weight: 700;
+            font-weight: 400;
             color: #1a1a2e;
             margin-bottom: 6px;
             text-align: center;
@@ -29,14 +40,15 @@
             color: #888;
             margin-bottom: 36px;
             text-align: center;
+            font-weight: 500;
         }
 
         /* ===== Card box ===== */
         .payment_box {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
-            padding: 40px 36px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 20px 60px rgba(0, 0, 0, 0.12);
+            padding: 44px 40px 36px;
             max-width: 460px;
             margin: 0 auto;
             position: relative;
@@ -50,7 +62,18 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #1a1a2e, #e74c3c, #1a1a2e);
+            background: linear-gradient(90deg, var(--navy) 0%, var(--red) 50%, var(--navy) 100%);
+        }
+
+        /* ===== Field label ===== */
+        .field_label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            display: block;
         }
 
         /* ===== Amount input row ===== */
@@ -68,12 +91,12 @@
 
         .rupee-sign {
             position: absolute;
-            left: 14px;
+            left: 16px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 18px;
-            font-weight: 700;
-            color: #aaa;
+            font-size: 20px;
+            font-weight: 800;
+            color: #c8cdd8;
             pointer-events: none;
             font-family: 'Syne', sans-serif;
             line-height: 1;
@@ -82,14 +105,14 @@
 
         .amount-input {
             width: 100%;
-            padding: 13px 16px 13px 34px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 22px;
+            padding: 16px 16px 16px 38px;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 24px;
             font-weight: 700;
             font-family: 'Syne', sans-serif;
-            color: #1a1a2e;
-            background: #fafafa;
+            color: var(--navy);
+            background: var(--input-bg);
             outline: none;
             box-sizing: border-box;
             transition: all 0.2s ease;
@@ -102,21 +125,21 @@
         }
 
         .amount-input:focus {
-            border-color: #1a1a2e;
+            border-color: var(--navy);
             background: #fff;
-            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.08);
+            box-shadow: 0 0 0 4px rgba(26, 26, 46, 0.07);
         }
 
         .amount-wrapper:focus-within .rupee-sign {
-            color: #1a1a2e;
+            color: var(--navy);
         }
 
         .amount-input.input-error {
-            border-color: #e74c3c !important;
+            border-color: var(--red) !important;
             background: #fff8f8 !important;
         }
 
-        /* ===== Quick amount buttons — horizontal row ===== */
+        /* ===== Quick amount buttons ===== */
         .quick-amounts {
             display: flex;
             flex-direction: column;
@@ -126,38 +149,38 @@
 
         .quick-amounts button {
             background: #f0f0f5;
-            border: 1.5px solid #e0e0ea;
-            border-radius: 7px;
-            padding: 5px 12px;
+            border: 2px solid #e0e0ea;
+            border-radius: 10px;
+            padding: 7px 14px;
             font-size: 12px;
-            font-weight: 600;
-            color: #555;
+            font-weight: 700;
+            color: #6b7190;
             cursor: pointer;
             white-space: nowrap;
             transition: all 0.18s ease;
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.4;
+            font-family: 'DM Sans', sans-serif;
         }
 
         .quick-amounts button:hover {
-            background: #1a1a2e;
-            border-color: #1a1a2e;
+            background: var(--navy);
+            border-color: var(--navy);
             color: #fff;
+            transform: translateX(2px);
         }
 
         /* ===== Pay button ===== */
         .pay-btn {
             width: 100%;
             padding: 15px 20px;
-            background: #1a1a2e;
+            background: var(--navy);
             color: #fff;
             border: none;
-            border-radius: 10px;
-            font-size: 14px;
+            border-radius: 12px;
+            font-size: 13px;
             font-weight: 700;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.1em;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.22s ease;
             font-family: 'Syne', sans-serif;
             display: flex;
             align-items: center;
@@ -168,7 +191,7 @@
         }
 
         .pay-btn:hover {
-            background: #e74c3c;
+            background: var(--red);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(231, 76, 60, 0.3);
         }
@@ -177,15 +200,33 @@
             transform: translateY(0);
         }
 
+        /* ===== Divider ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 22px 0 16px;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: #f0f0f0;
+        }
+
+        .divider-text {
+            font-size: 11px;
+            color: #c0c4d4;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
         /* ===== Trust row ===== */
         .trust_row {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 14px;
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid #f0f0f0;
             flex-wrap: wrap;
         }
 
@@ -225,10 +266,11 @@
                 <form action="{{ route('razorpay.payment') }}" method="POST">
                     @csrf
 
-                    {{-- Amount input + Quick buttons side by side --}}
+                    <span class="field_label">Enter Amount</span>
+
                     <div class="amount-row">
                         <div class="amount-wrapper">
-                             <input
+                            <input
                                 type="number"
                                 name="amount"
                                 id="amountInput"
@@ -248,7 +290,7 @@
                     </div>
 
                     @error('amount')
-                    <small class="text-danger" style="font-size:12px;">{{ $message }}</small>
+                    <small class="text-danger" style="font-size:12px;margin-top:4px;display:block;">{{ $message }}</small>
                     @enderror
 
                     <button type="submit" class="pay-btn">
@@ -259,6 +301,12 @@
                     </button>
 
                 </form>
+
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-text">SECURED BY</span>
+                    <span class="divider-line"></span>
+                </div>
 
                 <div class="trust_row">
                     <span class="trust_item">🔒 SSL Encrypted</span>

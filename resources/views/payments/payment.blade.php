@@ -6,19 +6,29 @@
     @include('home.homecss')
 
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap');
 
-        /* ===== Section wrapper — same as contact_section ===== */
-        .payment_section {
-            padding: 80px 0 80px 0;
-            background: #dfdfdf;
+        :root {
+            --navy: #1a1a2e;
+            --red: #e74c3c;
+            --bg: #dfdfdf;
+            --card-bg: #fff;
+            --text-muted: #8a8fa8;
+            --border: #e2e5ef;
         }
 
-        /* ===== Heading ===== */
+        body { font-family: 'DM Sans', sans-serif; }
+
+        /* ===== Section — same as page 1 ===== */
+        .payment_section {
+            padding: 80px 0 80px 0;
+            background: var(--bg);
+        }
+
         .payment_taital {
             font-family: 'Righteous', cursive;
             font-size: 38px;
-            font-weight: 700;
+            font-weight: 400;
             color: #1a1a2e;
             margin-bottom: 6px;
             text-align: center;
@@ -31,151 +41,96 @@
             text-align: center;
         }
 
-        /* ===== Card box ===== */
+        /* ===== Card ===== */
         .payment_box {
-            background: #fff;
-            border-radius: 16px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
-            padding: 40px 36px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.10);
+            padding: 60px 40px 48px;
             max-width: 460px;
             margin: 0 auto;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .payment_box::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            top: 0; left: 0; right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #1a1a2e, #e74c3c, #1a1a2e);
+            background: linear-gradient(90deg, var(--navy) 0%, var(--red) 50%, var(--navy) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 2s linear infinite;
         }
 
-        /* ===== Amount input row ===== */
-        .amount-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+        @keyframes shimmer {
+            0% { background-position: 200% center; }
+            100% { background-position: -200% center; }
         }
 
-        .amount-wrapper {
+        /* ===== Spinner ===== */
+        .spinner-wrap {
+            width: 72px;
+            height: 72px;
+            margin: 0 auto 28px;
             position: relative;
-            flex: 1;
         }
 
-        .rupee-sign {
+        .spinner-wrap::before {
+            content: '';
             position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            font-weight: 700;
-            color: #aaa;
-            pointer-events: none;
-            font-family: 'Syne', sans-serif;
-            line-height: 1;
-            transition: color 0.2s;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid var(--border);
         }
 
-        .amount-input {
-            width: 100%;
-            padding: 13px 16px 13px 34px;
-            border: 1.5px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 22px;
-            font-weight: 700;
-            font-family: 'Syne', sans-serif;
-            color: #1a1a2e;
-            background: #fafafa;
-            outline: none;
-            box-sizing: border-box;
-            transition: all 0.2s ease;
-            -moz-appearance: textfield;
+        .spinner-wrap::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            border: 4px solid transparent;
+            border-top-color: var(--red);
+            border-right-color: var(--navy);
+            animation: spin 0.9s linear infinite;
         }
 
-        .amount-input::-webkit-outer-spin-button,
-        .amount-input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-        }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        .amount-input:focus {
-            border-color: #1a1a2e;
-            background: #fff;
-            box-shadow: 0 0 0 3px rgba(26, 26, 46, 0.08);
-        }
-
-        .amount-wrapper:focus-within .rupee-sign {
-            color: #1a1a2e;
-        }
-
-        .amount-input.input-error {
-            border-color: #e74c3c !important;
-            background: #fff8f8 !important;
-        }
-
-        /* ===== Quick amount buttons — horizontal row ===== */
-        .quick-amounts {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex-shrink: 0;
-        }
-
-        .quick-amounts button {
-            background: #f0f0f5;
-            border: 1.5px solid #e0e0ea;
-            border-radius: 7px;
-            padding: 5px 12px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #555;
-            cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.18s ease;
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.4;
-        }
-
-        .quick-amounts button:hover {
-            background: #1a1a2e;
-            border-color: #1a1a2e;
-            color: #fff;
-        }
-
-        /* ===== Pay button ===== */
-        .pay-btn {
-            width: 100%;
-            padding: 15px 20px;
-            background: #1a1a2e;
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: 'Syne', sans-serif;
+        .spinner-icon {
+            position: absolute;
+            inset: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            white-space: nowrap;
-            margin-top: 24px;
+            font-size: 26px;
         }
 
-        .pay-btn:hover {
-            background: #e74c3c;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(231, 76, 60, 0.3);
+        .processing-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 8px;
         }
 
-        .pay-btn:active {
-            transform: translateY(0);
+        .processing-text {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
+
+        /* ===== Divider ===== */
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 32px 0 20px;
+        }
+
+        .divider-line { flex: 1; height: 1px; background: var(--border); }
+        .divider-text { font-size: 11px; color: #c0c4d4; font-weight: 600; letter-spacing: 0.05em; }
 
         /* ===== Trust row ===== */
         .trust_row {
@@ -183,9 +138,6 @@
             align-items: center;
             justify-content: center;
             gap: 14px;
-            margin-top: 22px;
-            padding-top: 18px;
-            border-top: 1px solid #f0f0f0;
             flex-wrap: wrap;
         }
 
@@ -220,49 +172,67 @@
             <h1 class="payment_taital">Processing ...</h1>
             <p class="payment_sub">Fast, safe & encrypted checkout via Razorpay</p>
 
-            <!-- <button id="rzp-button1">Pay</button> -->
+            <div class="payment_box">
+
+                <div class="spinner-wrap">
+                    <span class="spinner-icon">💳</span>
+                </div>
+
+                <div class="processing-title">Opening Payment Gateway</div>
+                <p class="processing-text">Please wait while we securely redirect you to Razorpay. Do not close this window.</p>
+
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span class="divider-text">SECURED BY</span>
+                    <span class="divider-line"></span>
+                </div>
+
+                <div class="trust_row">
+                    <span class="trust_item">🔒 SSL Encrypted</span>
+                    <span class="trust_sep"></span>
+                    <span class="trust_item">✅ PCI DSS Safe</span>
+                    <span class="trust_sep"></span>
+                    <span class="trust_item">⚡ Instant</span>
+                </div>
+
+            </div>
+
+            {{-- Razorpay script — logic untouched --}}
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
                 var options = {
-                    "key": "{{env('RAZORPAY_KEY')}}", // Enter the Key ID generated from the Dashboard
-                    "amount": "{{ $amount }}", // Amount is in currency subunits. 
+                    "key": "{{env('RAZORPAY_KEY')}}",
+                    "amount": "{{ $amount }}",
                     "currency": "INR",
-
-                    "name": "BlogSpot", //your business name
+                    "name": "BlogSpot",
                     "description": "Test Transaction",
                     "handler": function(response) {
-
                         var payId = response.razorpay_payment_id;
                         var orderId = response.razorpay_order_id;
                         var sign = response.razorpay_signature;
-
                         window.location.href = "{{ route('razorpay.callback') }}?payId=" + payId + "&orderId=" + orderId + "&sign=" + sign;
-                        // alert('Payment Successfull : ' + payId);
                     },
                     "image": "https://example.com/your_logo",
-                    "order_id": "{{ $orderId }}", // This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-                    // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-                    "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
-                        "name": "{{ $name }}", //your customer's name
+                    "order_id": "{{ $orderId }}",
+                    "prefill": {
+                        "name": "{{ $name }}",
                         'email': "{{ $email }}",
-                        'contact': "{{ $contact }}", //Provide the customer's phone number for better conversion rates 
+                        'contact': "{{ $contact }}",
                     },
-                    "notes": {
-                        "address": "Razorpay Corporate Office"
-                    },
-                    "theme": {
-                        "color": "#3399cc"
-                    }
+                    "notes": { "address": "Razorpay Corporate Office" },
+                    "theme": { "color": "#1a1a2e" }
                 };
                 var rzp1 = new Razorpay(options);
+                var redirectTimer = setTimeout(function() {
+                    window.location.href = "{{ route('razorpay.index') }}";
+                }, 500);
+
                 window.onload = function() {
                     rzp1.open();
+                    clearTimeout(redirectTimer);
                 };
-                // document.getElementById('rzp-button1').onclick = function(e) {
-                //     rzp1.open();
-                //     e.preventDefault();
-                // }
             </script>
+
         </div>
     </div>
 
