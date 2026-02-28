@@ -17,7 +17,9 @@
             --border: #e2e5ef;
         }
 
-        body { font-family: 'DM Sans', sans-serif; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
 
         /* ===== Section — same as page 1 ===== */
         .payment_section {
@@ -45,7 +47,7 @@
         .payment_box {
             background: var(--card-bg);
             border-radius: 20px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.04), 0 20px 60px rgba(0,0,0,0.10);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04), 0 20px 60px rgba(0, 0, 0, 0.10);
             padding: 60px 40px 48px;
             max-width: 460px;
             margin: 0 auto;
@@ -57,7 +59,9 @@
         .payment_box::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 4px;
             background: linear-gradient(90deg, var(--navy) 0%, var(--red) 50%, var(--navy) 100%);
             background-size: 200% 100%;
@@ -65,8 +69,13 @@
         }
 
         @keyframes shimmer {
-            0% { background-position: 200% center; }
-            100% { background-position: -200% center; }
+            0% {
+                background-position: 200% center;
+            }
+
+            100% {
+                background-position: -200% center;
+            }
         }
 
         /* ===== Spinner ===== */
@@ -96,7 +105,11 @@
             animation: spin 0.9s linear infinite;
         }
 
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
 
         .spinner-icon {
             position: absolute;
@@ -129,8 +142,18 @@
             margin: 32px 0 20px;
         }
 
-        .divider-line { flex: 1; height: 1px; background: var(--border); }
-        .divider-text { font-size: 11px; color: #c0c4d4; font-weight: 600; letter-spacing: 0.05em; }
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider-text {
+            font-size: 11px;
+            color: #c0c4d4;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
 
         /* ===== Trust row ===== */
         .trust_row {
@@ -200,36 +223,54 @@
             {{-- Razorpay script — logic untouched --}}
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
+                var redirectUrl = "{{ route('razorpay.index') }}";
+
+                var timeoutRedirect = setTimeout(function() {
+                    window.location.href = redirectUrl;
+                }, 10000); // 5 seconds
+
                 var options = {
                     "key": "{{env('RAZORPAY_KEY')}}",
                     "amount": "{{ $amount }}",
                     "currency": "INR",
                     "name": "BlogSpot",
                     "description": "Test Transaction",
+                    "order_id": "{{ $orderId }}",
+
                     "handler": function(response) {
+                        clearTimeout(timeoutRedirect); // stop timeout if success
+
                         var payId = response.razorpay_payment_id;
                         var orderId = response.razorpay_order_id;
                         var sign = response.razorpay_signature;
-                        window.location.href = "{{ route('razorpay.callback') }}?payId=" + payId + "&orderId=" + orderId + "&sign=" + sign;
+
+                        window.location.href =
+                            "{{ route('razorpay.callback') }}?payId=" + payId +
+                            "&orderId=" + orderId +
+                            "&sign=" + sign;
                     },
-                    "image": "https://example.com/your_logo",
-                    "order_id": "{{ $orderId }}",
+
+                    "modal": {
+                        "ondismiss": function() {
+                            window.location.href = redirectUrl;
+                        }
+                    },
+
                     "prefill": {
                         "name": "{{ $name }}",
-                        'email': "{{ $email }}",
-                        'contact': "{{ $contact }}",
+                        "email": "{{ $email }}",
+                        "contact": "{{ $contact }}"
                     },
-                    "notes": { "address": "Razorpay Corporate Office" },
-                    "theme": { "color": "#1a1a2e" }
+
+                    "theme": {
+                        "color": "#1a1a2e"
+                    }
                 };
+
                 var rzp1 = new Razorpay(options);
-                var redirectTimer = setTimeout(function() {
-                    window.location.href = "{{ route('razorpay.index') }}";
-                }, 500);
 
                 window.onload = function() {
                     rzp1.open();
-                    clearTimeout(redirectTimer);
                 };
             </script>
 

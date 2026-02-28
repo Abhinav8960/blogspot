@@ -140,32 +140,40 @@
         }
 
         /* ===== Quick amount buttons ===== */
-        .quick-amounts {
+        .quick-amounts-row {
             display: flex;
-            flex-direction: column;
-            gap: 6px;
-            flex-shrink: 0;
+            flex-direction: row;
+            gap: 10px;
+            /* spacing between buttons */
+            flex-wrap: wrap;
+            margin-top: 8px;
         }
 
-        .quick-amounts button {
+        .quick-amounts-row button {
             background: #f0f0f5;
             border: 2px solid #e0e0ea;
             border-radius: 10px;
-            padding: 7px 14px;
-            font-size: 12px;
+            padding: 8px 16px;
+            font-size: 13px;
             font-weight: 700;
             color: #6b7190;
             cursor: pointer;
-            white-space: nowrap;
-            transition: all 0.18s ease;
-            font-family: 'DM Sans', sans-serif;
+            transition: 0.2s ease;
         }
 
+
+        /* Hover same rakha */
         .quick-amounts button:hover {
             background: var(--navy);
             border-color: var(--navy);
             color: #fff;
-            transform: translateX(2px);
+            transform: translateY(-2px);
+            /* thoda premium hover feel */
+        }
+
+        /* Optional: Active Click Effect */
+        .quick-amounts button:active {
+            transform: scale(0.96);
         }
 
         /* ===== Pay button ===== */
@@ -268,7 +276,8 @@
 
                     <span class="field_label">Enter Amount</span>
 
-                    <div class="amount-row">
+                    <div class="amount-row d-flex flex-column">
+
                         <div class="amount-wrapper">
                             <input
                                 type="number"
@@ -281,12 +290,13 @@
                             <span class="rupee-sign">₹</span>
                         </div>
 
-                        <div class="quick-amounts">
+                        <div class="quick-amounts-row d-flex gap-2 mt-2">
                             <button type="button" onclick="document.getElementById('amountInput').value=100">₹100</button>
                             <button type="button" onclick="document.getElementById('amountInput').value=500">₹500</button>
                             <button type="button" onclick="document.getElementById('amountInput').value=1000">₹1,000</button>
                             <button type="button" onclick="document.getElementById('amountInput').value=2500">₹2,500</button>
                         </div>
+
                     </div>
 
                     @error('amount')
