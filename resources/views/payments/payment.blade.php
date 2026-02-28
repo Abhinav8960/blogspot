@@ -227,7 +227,7 @@
 
                 var timeoutRedirect = setTimeout(function() {
                     window.location.href = redirectUrl;
-                }, 10000); // 5 seconds
+                }, 60000); // 5 seconds
 
                 var options = {
                     "key": "{{env('RAZORPAY_KEY')}}",

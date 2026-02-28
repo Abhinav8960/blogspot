@@ -23,7 +23,7 @@ class RazorpayController extends Controller
         $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
         $orderData = [
             'receipt' => 'order_' . rand(1000, 9999),
-            'amount' => $amount * 100,
+            'amount' => $amount,
             'currency' => 'INR',
             'payment_capture' => 1,
         ];
