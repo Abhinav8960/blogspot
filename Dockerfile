@@ -17,6 +17,9 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
+RUN chmod -R 775 storage
+RUN chmod -R 775 bootstrap/cache
+
 # enable apache rewrite
 RUN a2enmod rewrite
 
