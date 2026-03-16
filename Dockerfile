@@ -2,17 +2,26 @@ FROM php:8.2-apache
 
 WORKDIR /var/www/html
 
-COPY . .
+COPY . /var/www/html
 
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
-    curl
+    curl \
+    libzip-dev
 
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
+RUN docker-php-ext-install pdo pdo_mysql
 
-RUN composer install
+# install composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
+# enable apache rewrite
+RUN a2enmod rewrite
+
+# change apache root to public folder
+RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
 EXPOSE 80
 
