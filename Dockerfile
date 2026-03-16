@@ -18,9 +18,6 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
-RUN php artisan config:clear
-RUN php artisan cache:clear
-
 # enable apache rewrite
 RUN a2enmod rewrite
 
@@ -31,7 +28,7 @@ RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available
 RUN chmod -R 777 storage
 RUN chmod -R 777 bootstrap/cache
 
-# temp directory fix (important)
+# temp directory fix
 RUN mkdir -p /tmp/laravel
 RUN chmod -R 777 /tmp/laravel
 ENV TMPDIR=/tmp/laravel
