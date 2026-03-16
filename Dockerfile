@@ -35,4 +35,4 @@ ENV TMPDIR=/tmp/laravel
 
 EXPOSE 80
 
-CMD ["apache2-foreground"]
+CMD php artisan migrate --force && apache2-foreground
