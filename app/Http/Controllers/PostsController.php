@@ -6,6 +6,7 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PostsController extends Controller
@@ -55,11 +56,13 @@ class PostsController extends Controller
         $post->user_id = $user->id;
 
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/posts'), $imageName);
+            // $image = $request->file('image');
+            // $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // $image->move(public_path('uploads/posts'), $imageName);
 
-            $post->image = 'uploads/posts/' . $imageName;
+            // $post->image = 'uploads/posts/' . $imageName;
+            $path = $request->file('image')->store('posts', 'public');
+            $post->image = 'storage/' . $path;
         }
 
         $post->save();
@@ -97,15 +100,23 @@ class PostsController extends Controller
         $post->user_id = $user->id;
 
         if ($request->hasFile('image')) {
-            if ($post->image && file_exists(public_path($post->image))) {
-                unlink(public_path($post->image));
+            // if ($post->image && file_exists(public_path($post->image))) {
+            //     unlink(public_path($post->image));
+            // }
+
+            // $image = $request->file('image');
+            // $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // $image->move(public_path('uploads/posts'), $imageName);
+
+            // $post->image = 'uploads/posts/' . $imageName;
+
+
+            if ($post->image) {
+                Storage::disk('public')->delete(str_replace('storage/', '', $post->image));
             }
 
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('uploads/posts'), $imageName);
-
-            $post->image = 'uploads/posts/' . $imageName;
+            $path = $request->file('image')->store('posts', 'public');
+            $post->image = 'storage/' . $path;
         }
 
         $post->save();
