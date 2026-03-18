@@ -20,6 +20,8 @@ RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available
 # permissions
 RUN chmod -R 777 storage bootstrap/cache
 
+RUN php artisan storage:link || true
+
 # temp fix
 RUN mkdir -p /tmp
 RUN chmod -R 777 /tmp
