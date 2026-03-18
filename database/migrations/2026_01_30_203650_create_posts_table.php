@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->string('title')->nullable();
             $table->longText('description')->nullable();
             $table->string('image')->nullable();
-            $table->boolean('status')->default(1);
+            $table->tinyInteger('status')->default(1)->nullable(false)->change();
             $table->timestamps();
         });
     }
