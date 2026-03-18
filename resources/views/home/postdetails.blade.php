@@ -75,6 +75,7 @@
                             {{ $post->title }}
                         </h2>
 
+                        <h3>By {{$post->user->name}}</h3>
 
                         <div class="post-meta">
                             Posted on {{ $post->created_at->format('d M Y') }}

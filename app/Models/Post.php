@@ -21,4 +21,9 @@ class Post extends Model
             default => ['label' => 'Unknown', 'class' => 'bg-secondary text-white'],
         };
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

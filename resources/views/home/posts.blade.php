@@ -14,7 +14,7 @@
                         @endif
 
                         <h4>{{$post->title}}</h4>
-                        <p>By {{$post->user_id}}</p>
+                        <p>By {{$post->user->name}}</p>
                         <div class="btn_main"><a href="{{url('postdetails',$post->id)}}">Read More</a></div>
                     </div>
                     @endforeach
