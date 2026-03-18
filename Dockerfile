@@ -33,6 +33,12 @@ RUN mkdir -p /tmp/laravel
 RUN chmod -R 777 /tmp/laravel
 ENV TMPDIR=/tmp/laravel
 
+RUN mkdir -p /var/www/html/storage/app/tmp
+RUN chmod -R 777 /var/www/html/storage
+
+RUN mkdir -p public/uploads/posts
+RUN chmod -R 777 public/uploads
+
 EXPOSE 80
 
 CMD php artisan migrate --force && apache2-foreground
