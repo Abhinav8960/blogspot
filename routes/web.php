@@ -5,6 +5,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\QuoteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Route::get('/postdetails/{id}', [HomeController::class, 'postdetails'])->name('p
 
 Route::get('/contactus', [HomeController::class, 'contactus'])->name('contactus');
 Route::post('/contactus', [HomeController::class, 'Contactuscreate'])->name('Contactuscreate');
-
+Route::post('/submit-quote', [QuoteController::class, 'store'])->name('quote.store');
 // Authentication routes
 require __DIR__ . '/auth.php';
 
