@@ -44,3 +44,9 @@ EXPOSE 80
 
 # ✅ Correct CMD (Shell form)
 CMD ["sh", "-c", "php artisan migrate --force || true && php artisan db:seed --force || true && apache2-foreground"]
+CMD ["sh", "-c", "\
+php artisan config:clear && \
+php artisan cache:clear && \
+php artisan migrate --force || true && \
+php artisan db:seed --force || true && \
+apache2-foreground"]
