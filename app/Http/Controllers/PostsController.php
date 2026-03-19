@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -13,8 +14,9 @@ class PostsController extends Controller
 {
     public function index(Request $request)
     {
-        // $posts = Post::orderBy('id', 'desc')->paginate(10);
         $query = Post::query();
+
+        $query = Post::withTrashed();
 
         if ($request->filled('search')) {
             $query
@@ -42,6 +44,7 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -55,14 +58,28 @@ class PostsController extends Controller
         $post->description = $request->description;
         $post->user_id = $user->id;
 
-        if ($request->hasFile('image')) {
-            // $image = $request->file('image');
-            // $imageName = time() . '.' . $image->getClientOriginalExtension();
-            // $image->move(public_path('uploads/posts'), $imageName);
+        // if ($request->hasFile('image')) {
+        //     // $image = $request->file('image');
+        //     // $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     // $image->move(public_path('uploads/posts'), $imageName);
 
-            // $post->image = 'uploads/posts/' . $imageName;
-            $path = $request->file('image')->store('posts', 'public');
-            $post->image = 'storage/' . $path;
+        //     // $post->image = 'uploads/posts/' . $imageName;
+        //     $path = $request->file('image')->store('posts', 'public');
+        //     $post->image = 'storage/' . $path;
+        // }
+
+        if ($request->hasFile('image')) {
+            $upload = Cloudinary::uploadApi()->upload($request->file('image')->getRealPath(), [
+                'folder' => 'posts',
+                'transformation' => [
+                    'width' => 500,
+                    'height' => 300,
+                    'crop' => 'fill'
+                ]
+            ]);
+
+            $post->image = $upload['secure_url']; // secure_url key
+            $post->public_id = $upload['public_id']; // public_id key
         }
 
         $post->save();
@@ -98,24 +115,42 @@ class PostsController extends Controller
         $post->title = $request->title;
         $post->description = $request->description;
 
+        // if ($request->hasFile('image')) {
+        //     // if ($post->image && file_exists(public_path($post->image))) {
+        //     //     unlink(public_path($post->image));
+        //     // }
+
+        //     // $image = $request->file('image');
+        //     // $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     // $image->move(public_path('uploads/posts'), $imageName);
+
+        //     // $post->image = 'uploads/posts/' . $imageName;
+
+
+        //     if ($post->image) {
+        //         Storage::disk('public')->delete(str_replace('storage/', '', $post->image));
+        //     }
+
+        //     $path = $request->file('image')->store('posts', 'public');
+        //     $post->image = 'storage/' . $path;  
+        // }
+
         if ($request->hasFile('image')) {
-            // if ($post->image && file_exists(public_path($post->image))) {
-            //     unlink(public_path($post->image));
-            // }
 
-            // $image = $request->file('image');
-            // $imageName = time() . '.' . $image->getClientOriginalExtension();
-            // $image->move(public_path('uploads/posts'), $imageName);
-
-            // $post->image = 'uploads/posts/' . $imageName;
-
-
-            if ($post->image) {
-                Storage::disk('public')->delete(str_replace('storage/', '', $post->image));
+            if ($post->public_id) {
+                Cloudinary::uploadApi()->destroy($post->public_id);
             }
+            $upload = Cloudinary::uploadApi()->upload($request->file('image')->getRealPath(), [
+                'folder' => 'posts',
+                'transformation' => [
+                    'width' => 500,
+                    'height' => 300,
+                    'crop' => 'fill'
+                ]
+            ]);
 
-            $path = $request->file('image')->store('posts', 'public');
-            $post->image = 'storage/' . $path;
+            $post->image = $upload['secure_url']; // secure_url key
+            $post->public_id = $upload['public_id']; // public_id key
         }
 
         $post->save();
@@ -127,10 +162,19 @@ class PostsController extends Controller
 
     public function delete($id)
     {
-        $post = $this->findModel($id);
+        $post = Post::withTrashed()->findOrFail($id);
+
+        if ($post->public_id) {
+            Cloudinary::uploadApi()->destroy($post->public_id);
+        }
+
         $post->status = -1;
         $post->save();
-        return redirect()->route('posts.index')->with('danger', 'Post deleted successfully');;
+
+        $post->delete(); // soft delete
+
+        return redirect()->route('posts.index')
+            ->with('danger', 'Post deleted successfully');
     }
 
     public function findModel($id)

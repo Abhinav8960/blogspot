@@ -8,13 +8,13 @@
                     <div class="col-md-4">
 
                         @if($post->image)
-                        <div><img src="{{ asset($post->image) }}" class="services_img"></div>
+                        <div><img src="{{($post->image) }}" class="services_img"></div>
                         @else
                         No Image
                         @endif
 
                         <h4>{{$post->title}}</h4>
-                        <p>By {{$post->user->name}}</p>
+                        <p>By {{$post->user->name ?? 'unknown'}}</p>
                         <div class="btn_main"><a href="{{url('postdetails',$post->id)}}">Read More</a></div>
                     </div>
                     @endforeach

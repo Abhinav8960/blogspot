@@ -62,7 +62,7 @@
                 <div class="col-md-5 mb-4 mt-5">
                     @if($post->image)
                     <div class="post-image">
-                        <img src="{{ asset($post->image) }}" alt="{{ $post->title }}">
+                        <img src="{{($post->image) }}" alt="{{ $post->title }}">
                     </div>
                     @endif
                 </div>
@@ -75,7 +75,7 @@
                             {{ $post->title }}
                         </h2>
 
-                        <h3>By {{$post->user->name}}</h3>
+                        <h3>By {{$post->user->name ?? 'unknown'}}</h3>
 
                         <div class="post-meta">
                             Posted on {{ $post->created_at->format('d M Y') }}

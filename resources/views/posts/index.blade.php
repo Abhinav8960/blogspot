@@ -34,10 +34,10 @@
                 </a>
             </div>
 
-                 @include('posts.search')
+            @include('posts.search')
 
-                
- 
+
+
             <table class="table table-striped custom-table">
                 <thead class="thead-dark">
                     <tr>
@@ -59,7 +59,7 @@
                         <td>{{ Str::limit($post->description, 50) }}</td>
                         <td>
                             @if($post->image)
-                            <img src="{{ asset($post->image) }}" width="80">
+                            <img src="{{($post->image) }}" width="80">
                             @else
                             No Image
                             @endif
@@ -73,7 +73,7 @@
 
                         <td>
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            @if( $post->status != -1 )
+                            @if( !$post->deleted_at )
                             <form action="{{ route('posts.delete', $post->id) }}"
                                 method="POST"
                                 style="display:inline;">

@@ -34,7 +34,7 @@
 
                         @if($post->image)
                         <div class="mb-2">
-                            <img src="{{ asset($post->image) }}" alt="Post Image"
+                            <img src="{{($post->image) }}" alt="Post Image"
                                 style="width:200px; height:auto; border:1px solid #050505ff; padding:4px;">
                         </div>
                         @endif
