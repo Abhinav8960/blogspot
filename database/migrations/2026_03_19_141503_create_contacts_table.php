@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contacts', function (Blueprint $table) {
-            $table->id();
-            $table->string('name')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('email')->nullable();
-            $table->longText('message')->nullable();
-            $table->boolean('status')->default(1);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('contacts')) {
+            Schema::create('contacts', function (Blueprint $table) {
+                $table->id();
+                $table->string('name')->nullable();
+                $table->string('phone')->nullable();
+                $table->string('email')->nullable();
+                $table->longText('message')->nullable();
+                $table->boolean('status')->default(1);
+                $table->timestamps();
+            });
+        }
     }
     /**
      * Reverse the migrations.
