@@ -42,10 +42,10 @@ RUN echo "upload_tmp_dir=/tmp" >> /usr/local/etc/php/conf.d/uploads.ini \
 
 EXPOSE 80
 
-# ✅ Correct CMD (Shell form)
 CMD ["sh", "-c", "\
-php artisan config:clear && \
-php artisan cache:clear && \
-php artisan migrate --force || true && \
-php artisan db:seed --force || true && \
+php artisan optimize:clear && \
+php artisan migrate --force && \
+if [ \"$TRUNCATE_POSTS\" = \"true\" ]; then \
+php artisan tinker --execute=\"DB::statement('TRUNCATE TABLE posts RESTART IDENTITY CASCADE');\"; \
+fi && \
 apache2-foreground"]
