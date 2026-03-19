@@ -7,8 +7,6 @@
              <h1 class="let_text">Let Start Talk with Us</h1>
              <a href="javascript:void(0)" onclick="openPopup()"></a>
              @include('home.getaquote')
-
-             <!-- <div class="getquote_bt"><a href="#">Get A Quote</a></div> -->
          </div>
      </div>
  </div>
