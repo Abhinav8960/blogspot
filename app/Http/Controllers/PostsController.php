@@ -97,7 +97,6 @@ class PostsController extends Controller
         $user = Auth::user();
         $post->title = $request->title;
         $post->description = $request->description;
-        $post->user_id = $user->id;
 
         if ($request->hasFile('image')) {
             // if ($post->image && file_exists(public_path($post->image))) {
