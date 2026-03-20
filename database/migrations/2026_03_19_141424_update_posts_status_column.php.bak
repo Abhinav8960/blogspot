@@ -12,11 +12,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if (DB::getDriverName() === 'pgsql') {
-            DB::statement('ALTER TABLE posts ALTER COLUMN status TYPE smallint USING status::smallint');
-        } else {
-            DB::statement('ALTER TABLE posts MODIFY status SMALLINT DEFAULT 1');
-        }
+        // if (DB::getDriverName() === 'pgsql') {
+        //     DB::statement('ALTER TABLE posts ALTER COLUMN status TYPE smallint USING status::smallint');
+        // } else {
+        //     DB::statement('ALTER TABLE posts MODIFY status SMALLINT DEFAULT 1');
+        // }
     }
 
     /**
