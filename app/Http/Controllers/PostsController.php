@@ -8,6 +8,7 @@ use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PostsController extends Controller
@@ -50,14 +51,27 @@ class PostsController extends Controller
     public function store(Request $request)
     {
 
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|min:3|max:20',
+            'description' => 'required|string|min:3|max:500',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $user = Auth::user();
+        if ($validator->fails()) {
 
+            //  AJAX request
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = Auth::user();
         $post = new Post;
         $post->title = $request->title;
         $post->description = $request->description;
@@ -67,7 +81,6 @@ class PostsController extends Controller
         //     // $image = $request->file('image');
         //     // $imageName = time() . '.' . $image->getClientOriginalExtension();
         //     // $image->move(public_path('uploads/posts'), $imageName);
-
         //     // $post->image = 'uploads/posts/' . $imageName;
         //     $path = $request->file('image')->store('posts', 'public');
         //     $post->image = 'storage/' . $path;
@@ -86,8 +99,14 @@ class PostsController extends Controller
             $post->image = $upload['secure_url']; // secure_url key
             $post->public_id = $upload['public_id']; // public_id key
         }
-
         $post->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Post created successfully'
+            ]);
+        }
 
         if ($user->is_admin == 1) {
             return redirect()
@@ -96,8 +115,7 @@ class PostsController extends Controller
         }
 
         Alert::success('Congrates! You have added the post Successfully');
-        return redirect()
-            ->route('welcome');
+        return redirect()->route('welcome');
     }
 
     public function edit($id)
@@ -110,11 +128,25 @@ class PostsController extends Controller
     {
         $post = $this->findModel($id);
 
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|min:3|max:20',
+            'description' => 'required|string|min:3|max:500',
             'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
+
+        if ($validator->fails()) {
+
+            //  AJAX request
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $user = Auth::user();
         $post->title = $request->title;
@@ -125,18 +157,13 @@ class PostsController extends Controller
         //     // if ($post->image && file_exists(public_path($post->image))) {
         //     //     unlink(public_path($post->image));
         //     // }
-
         //     // $image = $request->file('image');
         //     // $imageName = time() . '.' . $image->getClientOriginalExtension();
         //     // $image->move(public_path('uploads/posts'), $imageName);
-
         //     // $post->image = 'uploads/posts/' . $imageName;
-
-
         //     if ($post->image) {
         //         Storage::disk('public')->delete(str_replace('storage/', '', $post->image));
         //     }
-
         //     $path = $request->file('image')->store('posts', 'public');
         //     $post->image = 'storage/' . $path;  
         // }
@@ -161,6 +188,13 @@ class PostsController extends Controller
 
         $post->save();
 
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Post updated successfully'
+            ]);
+        }
+
         return redirect()
             ->route('posts.index')
             ->with('success', 'Post updated successfully');
@@ -169,11 +203,6 @@ class PostsController extends Controller
     public function delete($id)
     {
         $post = Post::withTrashed()->findOrFail($id);
-
-        if ($post->public_id) {
-            Cloudinary::uploadApi()->destroy($post->public_id);
-        }
-
         $post->status = -1;
         $post->save();
 

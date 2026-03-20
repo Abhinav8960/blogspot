@@ -26,7 +26,7 @@
             @endforeach
 
 
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center page-content-heading">
 
                 <h1 class="post_title">Posts</h1>
                 <a href="{{ route('posts.create') }}" class="btn btn-primary  mt-3 mr-4">

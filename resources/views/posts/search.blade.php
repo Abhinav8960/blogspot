@@ -2,7 +2,7 @@
     <div class="row">
 
         <!--  Search -->
-        <div class="col-md-4">
+        <div class="col-md-3">
             <input type="text"
                 name="search"
                 class="form-control"
@@ -31,7 +31,7 @@
 
         <!-- Submit -->
 
-        <div class="col-md-2">
+        <div class="col-md-3">
             <button class="btn btn-warning" type="submit">
                 Search
             </button>
