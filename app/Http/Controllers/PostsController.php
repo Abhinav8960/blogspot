@@ -15,13 +15,18 @@ class PostsController extends Controller
     public function index(Request $request)
     {
         $query = Post::query();
-
         $query = Post::withTrashed();
-
-        if ($request->filled('search')) {
-            $query
-                ->where('title', 'like', '%' . $request->search . '%')
+        if ($request->search) {
+            $query->where('title', 'like', '%' . $request->search . '%')
                 ->orWhere('description', 'like', '%' . $request->search . '%');
+        }
+
+        if ($request->status !== null && $request->status !== '') {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->date) {
+            $query->whereDate('created_at', $request->date);
         }
 
         $posts = $query
