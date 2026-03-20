@@ -9,6 +9,19 @@ return new class extends Migration
     {
         if (DB::getDriverName() === 'pgsql') {
 
+            // check current type
+            $type = DB::selectOne("
+                SELECT data_type 
+                FROM information_schema.columns 
+                WHERE table_name = 'posts' AND column_name = 'status'
+            ");
+
+            // agar already smallint hai → skip
+            if ($type && $type->data_type === 'smallint') {
+                return;
+            }
+
+            // boolean → smallint conversion
             DB::statement('ALTER TABLE posts ALTER COLUMN status DROP DEFAULT');
 
             DB::statement("
