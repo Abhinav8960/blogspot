@@ -14,7 +14,7 @@ return new class extends Migration
             DB::statement("
                 ALTER TABLE posts 
                 ALTER COLUMN status TYPE smallint 
-                USING (CASE WHEN status = true THEN 1 ELSE 0 END)
+                USING (CASE WHEN status IS TRUE THEN 1 ELSE 0 END)
             ");
 
             DB::statement('ALTER TABLE posts ALTER COLUMN status SET DEFAULT 1');
