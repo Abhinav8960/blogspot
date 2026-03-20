@@ -72,8 +72,11 @@
                         </td>
 
                         <td>
+
+                            @if(!$post->deleted_at)
+                            <!-- ACTIVE POST -->
                             <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                            @if( !$post->deleted_at )
+
                             <form action="{{ route('posts.delete', $post->id) }}"
                                 method="POST"
                                 style="display:inline;">
@@ -84,7 +87,19 @@
                                     Delete
                                 </button>
                             </form>
+                            @else
+                            <!-- DELETED POST -->
+                            <form action="{{ route('posts.restore', $post->id) }}"
+                                method="POST"
+                                style="display:inline;">
+                                @csrf
+                                @method('PATCH')
+                                <button class="btn btn-sm btn-success">
+                                    Restore
+                                </button>
+                            </form>
                             @endif
+
                         </td>
 
                     </tr>

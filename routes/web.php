@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
     Route::post('/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
     Route::delete('/posts/{id}', [PostsController::class, 'delete'])->name('posts.delete');
+    Route::patch('/posts/{id}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
     Route::get('/admin/contactus', [ContactUsController::class, 'index'])
         ->name('contactus.index');

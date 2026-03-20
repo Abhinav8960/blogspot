@@ -24,6 +24,7 @@ class Post extends Model
             1 => ['label' => 'Active', 'class' => 'bg-success text-white'],
             0 => ['label' => 'Inactive', 'class' => 'bg-warning text-white'],
             -1 => ['label' => 'Deleted', 'class' => 'bg-danger text-white'],
+            2 => ['label' => 'Restored', 'class' => 'bg-info text-white'],
             default => ['label' => 'Unknown', 'class' => 'bg-secondary text-white'],
         };
     }

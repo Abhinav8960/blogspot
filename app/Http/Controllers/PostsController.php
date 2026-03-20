@@ -114,6 +114,7 @@ class PostsController extends Controller
         $user = Auth::user();
         $post->title = $request->title;
         $post->description = $request->description;
+        $post->status = $request->status;
 
         // if ($request->hasFile('image')) {
         //     // if ($post->image && file_exists(public_path($post->image))) {
@@ -186,5 +187,15 @@ class PostsController extends Controller
         }
 
         abort(404, 'Post not found');
+    }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->status = 2;  //restored
+        $post->save();
+        $post->restore();
+
+        return redirect()->back()->with('success', 'Post restored successfully');
     }
 }
