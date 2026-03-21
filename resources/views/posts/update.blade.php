@@ -17,7 +17,7 @@
             <h1 class="post_title">Update Post</h1>
 
             <div class="post-form-wrapper">
-                <form action="{{route('posts.update', $post->id)}}" method="POST" class="post-form" enctype="multipart/form-data">
+                <form action="{{route('admin.posts.update', $post->id)}}" method="POST" class="post-form" enctype="multipart/form-data">
                     @csrf
                     @method('POST')
                     <div class="form-group">
@@ -81,7 +81,7 @@
             document.querySelectorAll('.error-title, .error-description, .error-image')
                 .forEach(el => el.innerText = '');
 
-            fetch("{{ route('posts.update', $post->id) }}", {
+            fetch("{{ route('admin.posts.update', $post->id) }}", {
                     method: "POST",
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
@@ -106,7 +106,7 @@
                         }
 
                     } else {
-                        window.location.href = "{{ route('posts.index') }}";
+                        window.location.href = "{{ route('admin.posts.index') }}";
                     }
                 })
                 .catch(err => console.log(err));

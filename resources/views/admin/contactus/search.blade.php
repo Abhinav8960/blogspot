@@ -1,4 +1,4 @@
- <form method="GET" action="{{ route('contactus.index') }}" class="mb-5">
+ <form method="GET" action="{{ route('admin.contactus.index') }}" class="mb-5">
      <div class="row g-2">
 
          <!-- Name -->
@@ -33,7 +33,7 @@
              <div class="justify-content-between align-items-center">
 
                  @if(request()->hasAny(['name','email','phone']))
-                 <a href="{{ route('contactus.index') }}"
+                 <a href="{{ route('admin.contactus.index') }}"
                      class="btn btn-outline-secondary"
                      title="Clear search">
                      Clear

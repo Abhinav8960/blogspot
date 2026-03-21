@@ -61,9 +61,9 @@
                         </td>
 
                         <td>
-                            <a href="{{ route('contactus.view', $contact->id) }}" class="btn btn-sm btn-warning">View</a>
+                            <a href="{{ route('admin.contactus.view', $contact->id) }}" class="btn btn-sm btn-warning">View</a>
                             @if( $contact->status != -1 )
-                            <form action="{{ route('contactus.delete', $contact->id) }}"
+                            <form action="{{ route('admin.contactus.delete', $contact->id) }}"
                                 method="POST"
                                 style="display:inline;">
                                 @csrf

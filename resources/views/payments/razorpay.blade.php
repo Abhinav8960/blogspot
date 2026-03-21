@@ -271,7 +271,7 @@
 
             <div class="payment_box">
 
-                <form action="{{ route('razorpay.payment') }}" method="POST">
+                <form action="{{ route('admin.razorpay.payment') }}" method="POST">
                     @csrf
 
                     <span class="field_label">Enter Amount</span>

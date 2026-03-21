@@ -398,6 +398,7 @@ button {
     width: 100%;
     float: left;
     padding-bottom: 90px;
+    margin-top: -60px;
 }
 
 .services_taital {
@@ -419,7 +420,7 @@ button {
 .services_section_2 {
     width: 100%;
     float: left;
-    margin-top: 90px;
+    margin-top: 20px;
 }
 
 .services_img {
@@ -1179,4 +1180,60 @@ button {
 
 .copyright_text a:hover {
     color: #e27141;
+}
+
+/* POSTS STYLE */
+
+.card-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.post-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    height: 100%;
+}
+
+.post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.post-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.no-image {
+    width: 100%;
+    height: 200px;
+    background: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 40px;
+}
+
+.post-content {
+    padding: 20px;
+}
+
+.post-content h4 {
+    margin: 0 0 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.post-author {
+    margin: 0;
+    color: #777;
+    font-size: 14px;
 }

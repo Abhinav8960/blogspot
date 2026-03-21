@@ -184,7 +184,7 @@
             </div>
 
             <div class="btn_group">
-                <a href="{{ route('razorpay.index') }}" class="btn_custom btn_retry">
+                <a href="{{ route('admin.razorpay.index') }}" class="btn_custom btn_retry">
                     ↩ Retry Payment
                 </a>
                 <a href="{{ url('/') }}" class="btn_custom btn_home">

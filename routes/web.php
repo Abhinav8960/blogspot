@@ -16,6 +16,7 @@ Route::get('/home', [HomeController::class, 'homepage'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 
+Route::get('/posts', [HomeController::class, 'posts'])->name('posts');
 Route::get('/post', [HomeController::class, 'post'])->name('post');
 Route::get('/postdetails/{id}', [HomeController::class, 'postdetails'])->name('postdetails');
 
@@ -26,36 +27,33 @@ Route::post('/submit-quote', [QuoteController::class, 'store'])->name('quote.sto
 require __DIR__ . '/auth.php';
 
 // Protected routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-    Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
-    Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
-    Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
-    Route::get('/posts/{id}', [PostsController::class, 'view'])->name('posts.view');
-    Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
-    Route::post('/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
-    Route::delete('/posts/{id}', [PostsController::class, 'delete'])->name('posts.delete');
-    Route::patch('/posts/{id}/restore', [PostsController::class, 'restore'])->name('posts.restore');
+Route::middleware(['auth'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
 
-    Route::get('/admin/contactus', [ContactUsController::class, 'index'])
-        ->name('contactus.index');
+        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-    Route::get('/admin/contactus/{id}', [ContactUsController::class, 'view'])
-        ->name('contactus.view');
+        // Posts
+        Route::get('/posts', [PostsController::class, 'index'])->name('posts.index');
+        Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
+        Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
+        Route::get('/posts/{id}', [PostsController::class, 'view'])->name('posts.view');
+        Route::get('/posts/edit/{id}', [PostsController::class, 'edit'])->name('posts.edit');
+        Route::post('/posts/update/{id}', [PostsController::class, 'update'])->name('posts.update');
+        Route::delete('/posts/{id}', [PostsController::class, 'delete'])->name('posts.delete');
+        Route::patch('/posts/{id}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
-    Route::delete('/admin/contactus/{id}', [ContactUsController::class, 'delete'])
-        ->name('contactus.delete');
+        // Contact
+        Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus.index');
+        Route::get('/contactus/{id}', [ContactUsController::class, 'view'])->name('contactus.view');
+        Route::delete('/contactus/{id}', [ContactUsController::class, 'delete'])->name('contactus.delete');
 
-    Route::get('/razorpay', [RazorpayController::class, 'index'])->name('razorpay.index');
-    Route::post('/razorpay/payment', [RazorpayController::class, 'payment'])->name('razorpay.payment');
-    Route::get('/razorpay/callback', [RazorpayController::class, 'callback'])->name('razorpay.callback');
-    Route::get('/payment-success', function () {
-        return view('payments.success');
-    })->name('payment.success');
+        // Razorpay
+        Route::get('/razorpay', [RazorpayController::class, 'index'])->name('razorpay.index');
+        Route::post('/razorpay/payment', [RazorpayController::class, 'payment'])->name('razorpay.payment');
+        Route::get('/razorpay/callback', [RazorpayController::class, 'callback'])->name('razorpay.callback');
 
-    Route::get('/payment-failed', function () {
-        return view('payments.failed');
-    })->name('payment.failed');
-
-    // Add other protected routes here
-});
+        Route::get('/payment-success', fn() => view('payments.success'))->name('payment.success');
+        Route::get('/payment-failed', fn() => view('payments.failed'))->name('payment.failed');
+    });

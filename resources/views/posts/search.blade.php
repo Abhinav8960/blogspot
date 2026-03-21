@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('posts.index') }}" class="mb-5">
+<form method="GET" action="{{ route('admin.posts.index') }}" class="mb-5">
     <div class="row">
 
         <!--  Search -->
@@ -35,7 +35,7 @@
             <button class="btn btn-warning" type="submit">
                 Search
             </button>
-            <a href="{{ route('posts.index') }}" class="btn btn-secondary">
+            <a href="{{ route('admin.posts.index') }}" class="btn btn-secondary">
                 Clear
             </a>
         </div>

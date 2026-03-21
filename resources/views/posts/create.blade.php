@@ -17,7 +17,7 @@
             <h1 class="post_title">Create Post</h1>
 
             <div class="post-form-wrapper">
-                <form action="{{route('posts.store')}}" method="POST" class="post-form" enctype="multipart/form-data">
+                <form action="{{route('admin.posts.store')}}" method="POST" class="post-form" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="title" class="form-label">Title</label>

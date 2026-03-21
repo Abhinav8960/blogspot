@@ -223,7 +223,7 @@
             {{-- Razorpay script — logic untouched --}}
             <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
             <script>
-                var redirectUrl = "{{ route('razorpay.index') }}";
+                var redirectUrl = "{{ route('admin.razorpay.index') }}";
 
                 var timeoutRedirect = setTimeout(function() {
                     window.location.href = redirectUrl;
@@ -245,7 +245,7 @@
                         var sign = response.razorpay_signature;
 
                         window.location.href =
-                            "{{ route('razorpay.callback') }}?payId=" + payId +
+                            "{{ route('admin.razorpay.callback') }}?payId=" + payId +
                             "&orderId=" + orderId +
                             "&sign=" + sign;
                     },

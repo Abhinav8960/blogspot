@@ -55,7 +55,7 @@
                     </div>
 
                     <div class="text-right">
-                        <a href="{{ route('contactus.index') }}" class="btn btn-outline-secondary px-4 back-btn">
+                        <a href="{{ route('admin.contactus.index') }}" class="btn btn-outline-secondary px-4 back-btn">
                             ← Back
                         </a>
 

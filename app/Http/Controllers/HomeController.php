@@ -99,4 +99,11 @@ class HomeController extends Controller
         $post = Post::where('status', 1)->findOrFail($id);
         return view('home.postdetails', compact('post'));
     }
+
+    public function posts()
+    {
+        $query = Post::query();
+        $posts = $query->where('status', 1)->orderBy('id', 'desc')->paginate(6);
+        return view('home.posts-page', compact('posts'));
+    }
 }

@@ -10,18 +10,17 @@
                          <li class="active"><a href="{{ url('/') }}">Home</a></li>
                          <li><a href="{{ route('about') }}">About</a></li>
                          <li><a href="{{ route('blog') }}">Blog</a></li>
+                         <li><a href="{{ route('posts') }}">Post</a></li>
                          <li><a href="{{ route('contactus') }}">Contact us</a></li>
                          @if (Route::has('login'))
                          @auth
-                         @if(!auth()->user()->isAdmin())
-                         <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
-                         @endif
+
                          <li class="dropdown" style="position: relative;">
                              <a href="#" class="dropdown-toggle">{{ Auth::user()->name }}</a>
                              <ul class="dropdown-content" style="position: absolute; right: 0; z-index: 1000; min-width: 200px; background: #fff; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 5px 0;">
                                  <li style="padding: 3px 0;"><a href="{{ route('profile.show') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-user"></i> Profile</a></li>
                                  @if(auth()->user()->isAdmin())
-                                 <li style="padding: 3px 0;"><a href="{{ route('dashboard') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                                 <li style="padding: 3px 0;"><a href="{{ route('admin.dashboard') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
                                  @endif
                                  <li class="divider" style="height: 1px; background: #eee; margin: 5px 0;"></li>
                                  <li style="padding: 3px 0;">

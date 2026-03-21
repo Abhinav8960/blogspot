@@ -29,7 +29,7 @@
             <div class="d-flex justify-content-between align-items-center page-content-heading">
 
                 <h1 class="post_title">Posts</h1>
-                <a href="{{ route('posts.create') }}" class="btn btn-primary  mt-3 mr-4">
+                <a href="{{ route('admin.posts.create') }}" class="btn btn-primary  mt-3 mr-4">
                     Create Post
                 </a>
             </div>
@@ -75,9 +75,9 @@
 
                             @if(!$post->deleted_at)
                             <!-- ACTIVE POST -->
-                            <a href="{{ route('posts.edit', $post->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                            <a href="{{ route('admin.posts.edit', $post->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                            <form action="{{ route('posts.delete', $post->id) }}"
+                            <form action="{{ route('admin.posts.delete', $post->id) }}"
                                 method="POST"
                                 style="display:inline;">
                                 @csrf
@@ -89,7 +89,7 @@
                             </form>
                             @else
                             <!-- DELETED POST -->
-                            <form action="{{ route('posts.restore', $post->id) }}"
+                            <form action="{{ route('admin.posts.restore', $post->id) }}"
                                 method="POST"
                                 style="display:inline;">
                                 @csrf
