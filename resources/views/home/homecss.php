@@ -41,6 +41,7 @@
 <style>
     body {
         background-color: #dfdfdfff;
+        /* background-color: #d4e3e338; */
     }
 
     .about-img-wrapper {
@@ -61,12 +62,6 @@
     .about_img:hover {
         transform: scale(1.03);
         /* subtle hover zoom */
-    }
-
-    .home-blog-section {
-        background: #f7f7f9;
-        /* same as post details bg */
-        padding: 80px 0;
     }
 
     .home-blog-title {
