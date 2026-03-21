@@ -67,7 +67,7 @@
             let btn = form.querySelector('button');
 
             btn.disabled = true;
-            btn.innerText = "Sending...";
+            btn.innerText = "Submitting...";
 
             // clear old errors + remove red borders
             document.querySelectorAll('.error-name, .error-phone, .error-email, .error-message')
