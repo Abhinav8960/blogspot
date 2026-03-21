@@ -109,12 +109,12 @@ class HomeController extends Controller
     }
     public function userposts($id)
     {
-        $myposts = Post::where('status', 1)
+        $posts = Post::where('status', 1)
             ->where('user_id', $id)
             ->orderBy('id', 'desc')
             ->paginate(6);
 
-        return view('home.userposts', compact('myposts'));
+        return view('home.userposts', compact('posts'));
     }
 
     public function userpostsedit($id)

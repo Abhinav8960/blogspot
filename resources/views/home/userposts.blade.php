@@ -24,7 +24,7 @@
             </div>
             <div class="services_section_2">
                 <div class="row">
-                    @foreach($myposts as $post)
+                    @foreach($posts as $post)
                     <div class="col-md-3 mb-3">
                         <a href="{{ url('postdetails', $post->id) }}" class="card-link">
                             <div class="post-card">
