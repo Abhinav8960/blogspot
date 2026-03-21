@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -54,12 +55,25 @@ class HomeController extends Controller
 
     public function Contactuscreate(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|min:3',
-            'phone' => 'required|digits_between:10,12',
+            'phone' => 'required|digits:10',
             'email' => 'required|email',
-            'message' => 'required|min:10',
+            'message' => 'required|min:10|max:250',
         ]);
+
+        if ($validator->fails()) {
+            //  AJAX request
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
 
         $contact = new Contact();
         $contact->name = $request->name;
@@ -67,6 +81,13 @@ class HomeController extends Controller
         $contact->email = $request->email;
         $contact->message = $request->message;
         $contact->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Request Sent successfully'
+            ]);
+        }
 
         Alert::success('Congrates! You have added the post Successfully');
         return redirect()
