@@ -71,9 +71,20 @@
                 <div class="col-md-7 mt-5">
                     <div class="post-card">
 
-                        <h2 class="mb-2 post-title">
-                            {{ $post->title }}
-                        </h2>
+
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <h2 class="post-title mb-0">
+                                {{ $post->title }}
+                            </h2>
+
+                            @auth
+                            @if(auth()->id() == $post->user_id)
+                            <a href="{{ route('home.userpostsedit', $post->id) }}" class="btn btn-sm btn-outline-dark edit-btn">
+                                <i class="fas fa-edit"></i> Edit
+                            </a>
+                            @endif
+                            @endauth
+                        </div>
 
                         <h3>By {{$post->user->name ?? 'unknown'}}</h3>
 
@@ -98,7 +109,18 @@
     <!-- post details section end -->
 
     @include('home.footer')
+    <style>
+        .edit-btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: inline-block !important;
+            color: #000 !important;
+        }
 
+        .edit-btn i {
+            color: #000 !important;
+        }
+    </style>
 </body>
 
 </html>

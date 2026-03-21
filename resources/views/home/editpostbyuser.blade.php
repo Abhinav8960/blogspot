@@ -18,12 +18,12 @@
     <!-- post details section start -->
     <div class="contact_section layout_padding">
         <div class="container">
-            <h1 class="contact_taital">Add Post</h1>
-            <form ... novalidate action="{{route('posts.store')}}" method="POST" class="contact-form">
+            <h1 class="contact_taital">Edit Post</h1>
+            <form novalidate action="{{ route('home.userpostsupdate', $post->id) }}" method="POST" class="contact-form" enctype="multipart/form-data">
                 @csrf
                 <div class="email_text">
                     <div class="form-group">
-                        <input type="text" name="title" placeholder="Title" class="email-bt">
+                        <input type="text" name="title" placeholder="Title" class="email-bt" value="{{$post->title}}">
                         <small class="text-danger error-title"></small>
                     </div>
 
@@ -32,14 +32,23 @@
                             name="description"
                             rows="5"
                             placeholder="Description"
-                            class="massage-bt">{{ old('description') }}</textarea>
+                            class="massage-bt">{{$post->description}}</textarea>
                         <small class=" text-danger error-description"></small>
                     </div>
 
+
                     <div class="form-group">
+                        @if($post->image)
+                        <div class="mb-2">
+                            <img src="{{ ($post->image) }}" alt="Post Image"
+                                style="width:200px; height:auto; border:1px solid #050505ff; padding:4px;">
+                        </div>
+                        @endif
                         <input type="file" name="image" placeholder="Image" class="email-bt">
                         <small class="text-danger error-image"></small>
                     </div>
+
+
 
                     <div class="btn_main">
                         <button type="submit" class="btn btn-dark">
@@ -77,7 +86,7 @@
                 el.classList.remove('border-danger');
             });
 
-            fetch("{{ route('posts.store') }}", {
+            fetch("{{ route('home.userpostsupdate', $post->id) }}", {
                     method: "POST",
                     headers: {
                         'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,

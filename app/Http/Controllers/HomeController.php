@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Post;
 use App\Models\User;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -105,5 +106,79 @@ class HomeController extends Controller
         $query = Post::query();
         $posts = $query->where('status', 1)->orderBy('id', 'desc')->paginate(6);
         return view('home.posts-page', compact('posts'));
+    }
+    public function userposts($id)
+    {
+        $myposts = Post::where('status', 1)
+            ->where('user_id', $id)
+            ->orderBy('id', 'desc')
+            ->paginate(6);
+
+        return view('home.userposts', compact('myposts'));
+    }
+
+    public function userpostsedit($id)
+    {
+        $post = Post::find($id);
+        return view('home.editpostbyuser', compact('post'));
+    }
+
+    public function userpostsupdate(Request $request, $id)
+    {
+        $post = Post::find($id);
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required|string|min:3|max:20',
+            'description' => 'required|string|min:3|max:500',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        if ($validator->fails()) {
+
+            //  AJAX request
+            if ($request->ajax()) {
+                return response()->json([
+                    'status' => false,
+                    'errors' => $validator->errors()
+                ], 422);
+            }
+            return redirect()->back()
+                ->withErrors($validator)
+                ->withInput();
+        }
+
+        $user = Auth::user();
+        $post->title = $request->title;
+        $post->description = $request->description;
+        $post->status = $request->status;
+
+
+        if ($request->hasFile('image')) {
+
+            if ($post->public_id) {
+                Cloudinary::uploadApi()->destroy($post->public_id);
+            }
+            $upload = Cloudinary::uploadApi()->upload($request->file('image')->getRealPath(), [
+                'folder' => 'posts',
+                'transformation' => [
+                    'width' => 500,
+                    'height' => 300,
+                    'crop' => 'fill'
+                ]
+            ]);
+
+            $post->image = $upload['secure_url']; // secure_url key
+            $post->public_id = $upload['public_id']; // public_id key
+        }
+
+        $post->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Post updated successfully'
+            ]);
+        }
+        return redirect()->route('home.userposts', Auth::id());
     }
 }

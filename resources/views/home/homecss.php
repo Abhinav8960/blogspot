@@ -180,4 +180,58 @@
     .input-error {
         border: 1px solid #dc3545 !important;
     }
+
+
+    /* ===== My Posts Section Custom ===== */
+    .my-posts-section .post-card {
+        border-radius: 12px;
+        overflow: hidden;
+        background: #fff;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+        transition: all 0.3s ease;
+    }
+
+    .my-posts-section .post-card:hover {
+        transform: translateY(-5px);
+    }
+
+    /* Image chhoti */
+    .my-posts-section .post-image img {
+        width: 100%;
+        height: 170px;
+        object-fit: cover;
+    }
+
+    .my-posts-section .no-image {
+        height: 170px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f2f2f2;
+        font-size: 28px;
+        color: #aaa;
+    }
+
+    /* Content compact */
+    .my-posts-section .post-content {
+        padding: 10px;
+    }
+
+    .my-posts-section .post-content h4 {
+        font-size: 15px;
+        margin-bottom: 4px;
+    }
+
+    .my-posts-section .post-author {
+        font-size: 12px;
+        color: #777;
+    }
+
+    @media (max-width: 576px) {
+        .my-posts-section .d-flex {
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+        }
+    }
 </style>

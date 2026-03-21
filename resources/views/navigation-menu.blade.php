@@ -89,9 +89,14 @@
                             <x-dropdown-link href="{{ route('profile.show') }}">
                                 <p style="color: black!important;">{{ __('Profile') }}</p>
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('home.userposts', auth()->id()) }}">
+                                <p style="color: black!important;">{{ __('Posts') }}</p>
+                            </x-dropdown-link>
+                            @if(auth()->user()->isAdmin())
                             <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                 <p style="color: black!important;">{{ __('Dashboard') }}</p>
                             </x-dropdown-link>
+                            @endif
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                             <x-dropdown-link href="{{ route('api-tokens.index') }}">
