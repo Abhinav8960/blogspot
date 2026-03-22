@@ -129,9 +129,11 @@
                             title: 'Sent!',
                             text: res.body.message || 'We will contact you shortly.',
                             confirmButtonColor: '#2b2278'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = "{{ route('home.userposts', auth()->id()) }}";
+                            }
                         });
-
-                        window.location.href = "{{ route('home.userposts', auth()->id()) }}";
                     }
 
                     btn.disabled = false;

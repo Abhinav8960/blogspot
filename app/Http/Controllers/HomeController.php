@@ -150,8 +150,6 @@ class HomeController extends Controller
         $user = Auth::user();
         $post->title = $request->title;
         $post->description = $request->description;
-        $post->status = $request->status;
-
 
         if ($request->hasFile('image')) {
 
