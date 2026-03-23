@@ -5,14 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Contact;
 use App\Models\Post;
 use App\Models\User;
+use App\Notifications\ContactNotification;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
+use App\Services\MailService;
+use App\Mail\ContactFormMail;
 
 class HomeController extends Controller
+
 {
+
+    protected $mailService;
+
+    public function __construct(MailService $mailService)
+    {
+        $this->mailService = $mailService;
+    }
+
+
     public function index()
     {
         if (Auth::id()) {
@@ -83,14 +97,23 @@ class HomeController extends Controller
         $contact->message = $request->message;
         $contact->save();
 
+        // $admin = User::where('is_admin', 1)->first();
+
+        //  notification fire
+        // if ($admin) {
+        //     $admin->notify(new ContactNotification($contact));
+        // }
+
+        $this->mailService->sendToAdmin(new ContactFormMail($contact));
+
+
         if ($request->ajax()) {
             return response()->json([
                 'status' => true,
                 'message' => 'Request Sent successfully'
             ]);
         }
-
-        Alert::success('Congrates! You have added the post Successfully');
+        Alert::success('Congrates! Request Sent successfully');
         return redirect()
             ->route('welcome');
     }
