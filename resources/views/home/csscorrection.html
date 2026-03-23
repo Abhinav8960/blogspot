@@ -1,3 +1,27 @@
 @if(!auth()->user()->isAdmin())
 <li><a href="{{ route('posts.create') }}">Add your Own Post</a></li>
 @endif
+<style>
+    .menu_main ul li > a::after {
+        content: "";
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        bottom: 8px;
+        height: 2px;
+        background: #89d8fc;
+        border-radius: 2px;
+        width: 0%;
+        transition: width 0.3s ease;
+    }
+
+    .menu_main ul li > a:hover::after,
+    .menu_main ul li.active > a::after {
+        width: calc(100% - 20px);
+    }
+
+    .menu_main ul li.active > a {
+        color: #89d8fc !important;
+    }
+</style>
+ 
