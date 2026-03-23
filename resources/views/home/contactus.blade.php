@@ -124,7 +124,7 @@
                             icon: 'success',
                             title: 'Sent!',
                             text: res.body.message || 'We will contact you shortly.',
-                            confirmButtonColor: '#2b2278'
+                            confirmButtonColor: '#89D8FC'
                         });
 
                         form.reset();
@@ -138,7 +138,7 @@
                         icon: 'error',
                         title: 'Oops!',
                         text: data.message || 'Something went wrong.',
-                        confirmButtonColor: '#2b2278'
+                        confirmButtonColor: '#89D8FC'
                     });
 
                     btn.disabled = false;

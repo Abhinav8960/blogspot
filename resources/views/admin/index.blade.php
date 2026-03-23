@@ -32,7 +32,7 @@
                         icon: 'info',
                         title: 'New Contact!',
                         text: data.name + " sent a message",
-                        confirmButtonColor: '#2b2278'
+                        confirmButtonColor: '#89D8FC'
                     });
 
                 });

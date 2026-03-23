@@ -321,7 +321,7 @@ button {
 
 .menu_main li a:hover {
     color: #ffffff;
-    background-color: #2b2278;
+    background-color: #89d8fc;
 }
 
 .mb-lg-0,
@@ -386,7 +386,7 @@ button {
 }
 
 .read_bt a:hover {
-    background-color: #2b2278;
+    background-color: #89d8fc;
     color: #ffffff;
 }
 
@@ -440,7 +440,7 @@ button {
     float: left;
     font-size: 16px;
     color: #ffffff;
-    background-color: #2b2278;
+    background-color: #89d8fc;
     text-align: center;
     padding: 10px 0px;
     border-radius: 30px;
@@ -517,7 +517,7 @@ button {
 
 .readmore_bt a:hover {
     color: #ffffff;
-    background-color: #2b2278;
+    background-color: #89d8fc;
 }
 
 .about_img {
@@ -532,12 +532,10 @@ button {
 .blog_section {
     width: 100%;
     float: left;
-    background-image: url(../images/blog-bg.png);
-    height: auto;
+    background-image: url(../images/blog-mobile-bg.png);
     background-repeat: no-repeat;
-    background-size: 100%;
-    padding-bottom: 345px;
-    padding-top: 200px;
+    background-size: 100% 100%;
+    padding: 10vh 0;
 }
 
 .blog_taital {
@@ -714,7 +712,7 @@ button {
 }
 
 .carousel-indicators .active {
-    background-color: #2b2278;
+    background-color: #89d8fc;
 }
 
 /* client section end */
@@ -765,7 +763,7 @@ button {
 }
 
 .read_bt_1 a:hover {
-    background-color: #2b2278;
+    background-color: #89d8fc;
     color: #ffffff;
 }
 
@@ -797,7 +795,7 @@ button {
     float: left;
     font-size: 16px;
     color: #ffffff;
-    background-color: #2b2278;
+    background-color: #89d8fc;
     text-align: center;
     padding: 10px 0px;
     border-radius: 30px;
@@ -815,7 +813,7 @@ button {
 @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap");
 
 :root {
-    --navy: #2b2278;
+    --navy: #89d8fc;
     --dark: #000d10;
     --accent: #8b5cf6;
     --light-navy: #8b5cf6;
@@ -1091,7 +1089,7 @@ button {
     width: 170px;
     float: left;
     font-size: 18px;
-    color: #2b2278;
+    color: #89d8fc;
     background-color: transparent;
     padding: 5px 0px;
     text-align: center;
@@ -1142,7 +1140,7 @@ button {
 }
 
 .call_text a:hover {
-    color: #e27141;
+    color: #89d8fc;
 }
 
 /* footer section end */

@@ -158,7 +158,7 @@
         width: 44px;
         height: 44px;
         border-radius: 12px;
-        background: linear-gradient(135deg, #2b2278, #8b5cf6);
+        background: linear-gradient(135deg, #89D8FC, #8b5cf6);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -229,7 +229,7 @@
     }
 
     .qp-input:focus {
-        border-color: #2b2278;
+        border-color: #89D8FC;
         background: #fff;
     }
 
@@ -278,7 +278,7 @@
 
     .qp-drop.open .qp-drop-btn,
     .qp-drop-btn:focus {
-        border-color: #2b2278;
+        border-color: #89D8FC;
         background: #fff;
     }
 
@@ -329,21 +329,21 @@
 
     .qp-drop-item:hover {
         background: #f0f0ff;
-        color: #2b2278;
+        color: #89D8FC;
     }
 
     .qp-drop-item:hover i {
-        color: #2b2278;
+        color: #89D8FC;
     }
 
     .qp-drop-item.active {
         background: #ede9fe;
-        color: #2b2278;
+        color: #89D8FC;
         font-weight: 600;
     }
 
     .qp-drop-item.active i {
-        color: #2b2278;
+        color: #89D8FC;
     }
 
     /* Submit */
@@ -351,7 +351,7 @@
         margin-top: 14px;
         width: 100%;
         height: 44px;
-        background: linear-gradient(135deg, #2b2278, #8b5cf6);
+        background: linear-gradient(135deg, #89D8FC, #8b5cf6);
         color: #fff;
         border: none;
         border-radius: 10px;
@@ -498,7 +498,7 @@
                         icon: 'success',
                         title: 'Sent!',
                         text: data.message || 'We will contact you shortly.',
-                        confirmButtonColor: '#2b2278'
+                        confirmButtonColor: '#89D8FC'
                     });
                     form.reset();
                     document.getElementById('qpDropLabel').textContent = 'Select Activity';
@@ -512,7 +512,7 @@
                         icon: 'error',
                         title: 'Oops!',
                         text: data.message || 'Something went wrong.',
-                        confirmButtonColor: '#2b2278'
+                        confirmButtonColor: '#89D8FC'
                     });
                 }
             })
@@ -521,7 +521,7 @@
                     icon: 'error',
                     title: 'Error',
                     text: 'Network error.',
-                    confirmButtonColor: '#2b2278'
+                    confirmButtonColor: '#89D8FC'
                 });
             })
             .finally(function() {
