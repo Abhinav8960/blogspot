@@ -14,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Services\MailService;
 use App\Mail\ContactFormMail;
+use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
 
@@ -104,7 +105,12 @@ class HomeController extends Controller
         //     $admin->notify(new ContactNotification($contact));
         // }
 
-        $this->mailService->sendToAdmin(new ContactFormMail($contact));
+        // $this->mailService->sendToAdmin(new ContactFormMail($contact));
+        try {
+            $this->mailService->sendToAdmin(new ContactFormMail($contact));
+        } catch (\Exception $e) {
+            Log::error('Mail Error: ' . $e->getMessage());
+        }
 
 
         if ($request->ajax()) {
