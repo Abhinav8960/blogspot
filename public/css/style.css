@@ -465,7 +465,7 @@ button {
 }
 
 .menu_main ul li a:hover {
-    color: white !important;
+    color: #89d8fc !important;
     text-decoration: none;
 }
 
@@ -499,7 +499,7 @@ button {
 
 .dark-dropdown .dropdown-content a:hover,
 .dark-dropdown .dropdown-content .logout-btn:hover {
-    color: #fff !important;
+    color: #89d8fc !important;
     background-color: #444;
 }
 
