@@ -61,7 +61,6 @@
 
                     <a href="/auth/google"
                         class="mt-4 w-full inline-flex justify-center items-center gap-3 px-4 py-2 border border-gray-300 rounded-md shadow-sm bg-white text-gray-700 text-sm font-medium hover:bg-gray-100 transition">
-
                         <!-- Google Icon SVG -->
                         <svg class="w-5 h-5" viewBox="0 0 48 48">
                             <path fill="#EA4335" d="M24 9.5c3.54 0 6.73 1.22 9.24 3.6l6.9-6.9C35.68 2.3 30.2 0 24 0 14.64 0 6.6 5.4 2.6 13.2l8.04 6.24C12.5 13.1 17.8 9.5 24 9.5z" />
@@ -69,7 +68,6 @@
                             <path fill="#FBBC05" d="M10.64 28.44A14.5 14.5 0 0 1 9.5 24c0-1.54.26-3.04.74-4.44L2.2 13.32A23.94 23.94 0 0 0 0 24c0 3.9.94 7.6 2.6 10.8l8.04-6.36z" />
                             <path fill="#34A853" d="M24 48c6.48 0 11.92-2.14 15.9-5.82l-7.18-5.6c-2 1.34-4.56 2.12-8.72 2.12-6.2 0-11.5-3.6-13.36-8.94l-8.04 6.36C6.6 42.6 14.64 48 24 48z" />
                         </svg>
-
                         <span>Continue with Google</span>
                     </a>
                 </div>
