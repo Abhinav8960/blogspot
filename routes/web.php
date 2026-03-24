@@ -10,6 +10,29 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use Laravel\Socialite\Facades\Socialite;
+
+Route::get('/auth/google', function () {
+    return Socialite::driver('google')->redirect();
+});
+
+Route::get('/auth/google/callback', function () {
+    $googleUser = Socialite::driver('google')->user();
+
+    $user = \App\Models\User::updateOrCreate(
+        ['email' => $googleUser->getEmail()],
+        [
+            'name' => $googleUser->getName(),
+            'google_id' => $googleUser->getId(),
+        ]
+    );
+
+    Auth::login($user);
+
+    return redirect('/');
+});
+
+
 // Public routes
 Route::get('/', [HomeController::class, 'homepage'])->name('welcome');
 Route::get('/home', [HomeController::class, 'homepage'])->name('home');

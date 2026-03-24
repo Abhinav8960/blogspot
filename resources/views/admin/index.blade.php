@@ -26,7 +26,7 @@
             echo.private('App.Models.User.{{ auth()->id() }}')
                 .notification((data) => {
 
-                    console.log("🔥 Notification received:", data);
+                    console.log(" Notification received:", data);
 
                     Swal.fire({
                         icon: 'info',
