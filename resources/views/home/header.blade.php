@@ -18,8 +18,14 @@
                            @if (Route::has('login'))
                            @auth
 
-                           <li class="dropdown" style="position: relative;">
-                               <a href="#" class="dropdown-toggle">{{ Auth::user()->name }}</a>
+                           <li class="dropdown" style="position: relative;" style="display:flex; align-items:center; gap:20px;">
+                               <a href="#" class="dropdown-toggle">
+                                   {{-- Profile Image --}}
+                                   <img src="{{ Auth::user()->profile_photo ? asset('uploads/profile/'.Auth::user()->profile_photo) : asset('images/default-user.png') }}"
+                                       style="width: 32px; height:32px; border-radius:60%; object-fit:cover;">
+
+                                   {{-- Username --}}
+                                   {{ Auth::user()->name }}</a>
                                <ul class="dropdown-content" style="position: absolute; right: 0; z-index: 1000; min-width: 200px; background: #89d8fc; border-radius: 4px; box-shadow: 0 0 10px rgba(0,0,0,0.1); padding: 5px 0;">
                                    <li style="padding: 3px 0;"><a href="{{ route('profile.show') }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-user"></i> Profile</a></li>
                                    <li style="padding: 3px 0;"><a href="{{ route('home.userposts', auth()->id()) }}" style="display: block; padding: 8px 20px; color: #333; text-decoration: none; transition: all 0.3s ease; border-radius: 4px; margin: 0 5px;"><i class="fas fa-paw"></i> My Posts</a></li>
@@ -47,6 +53,18 @@
                </div>
            </div>
 
+           <style>
+               .dropdown-toggle img {
+                   border: 2px solid #fff;
+                   transition: 0.3s;
+               }
+
+               .dropdown-toggle:hover img {
+                   transform: scale(1.1);
+                   border-color: #89d8fc;
+                   box-shadow: 0 0 8px #89d8fc;
+               }
+           </style>
            <script>
                function updateDropdownTextColor(dropdown) {
                    const content = dropdown.querySelector('.dropdown-content');

@@ -334,6 +334,7 @@ button {
     height: 2px;
     opacity: 0;
     background: #89d8fc;
+    box-shadow: 0 0 8px #89d8fc;
     transition: width 0.3s ease;
 }
 
@@ -466,6 +467,7 @@ button {
 
 .menu_main ul li a:hover {
     color: #89d8fc !important;
+    text-shadow: 0 0 8px #89d8fc;
     text-decoration: none;
 }
 
