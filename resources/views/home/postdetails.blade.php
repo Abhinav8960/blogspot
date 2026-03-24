@@ -79,7 +79,7 @@
 
                             @auth
                             @if(auth()->id() == $post->user_id)
-                            <a href="{{ route('home.userpostsedit', $post->id) }}" class="btn btn-sm btn-outline-dark edit-btn">
+                            <a href="{{ auth()->user()->isAdmin() ? route('admin.posts.index') :  route('home.userpostsedit', $post->id) }}" class="btn btn-sm btn-outline-dark edit-btn">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                             @endif
