@@ -26,7 +26,7 @@
             @endforeach
 
 
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center page-content-heading">
 
                 <h1 class="post_title">Contact US</h1>
             </div>

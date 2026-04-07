@@ -1,5 +1,5 @@
-<form method="GET" action="{{ route('admin.posts.index') }}" class="mb-5">
-    <div class="row">
+<form method="GET" action="{{ route('admin.posts.index') }}" class="admin-search-form">
+    <div class="row g-2">
 
         <!--  Search -->
         <div class="col-md-3">

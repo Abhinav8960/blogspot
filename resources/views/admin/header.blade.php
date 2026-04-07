@@ -175,7 +175,7 @@
                             <button
                                 type="submit"
                                 class="nav-link btn btn-link p-0"
-                                style="color: #6A6C70 ; text-decoration: none;">
+                                style="color: #ffffff; text-decoration: none; transition: color 0.3s ease;">
                                 <i class="fa fa-sign-out mr-1"></i> Logout
                             </button>
                         </form>

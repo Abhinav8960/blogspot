@@ -1,4 +1,4 @@
- <form method="GET" action="{{ route('admin.contactus.index') }}" class="mb-5">
+ <form method="GET" action="{{ route('admin.contactus.index') }}" class="admin-search-form">
      <div class="row g-2">
 
          <!-- Name -->
