@@ -85,7 +85,7 @@
                         }
 
                     } else {
-                        window.location.href = "{{ route('posts.index') }}";
+                        window.location.href = "{{ route('posts') }}";
                     }
                 })
                 .catch(err => console.log(err));
