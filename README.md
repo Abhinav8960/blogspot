@@ -11,6 +11,7 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 ## ✨ Features
 
 ### 🔐 Authentication & User Management
+
 - **Laravel Jetstream** with Livewire stack
 - **Two-Factor Authentication (2FA)**
 - **Google OAuth** integration
@@ -18,6 +19,7 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 - **Email verification** and password reset
 
 ### 📝 Blog Management
+
 - **CRUD operations** for blog posts
 - **Soft delete** functionality
 - **Image uploads** with Cloudinary integration
@@ -26,6 +28,7 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 - **Search and filtering** capabilities
 
 ### 👨‍💼 Admin Panel
+
 - **Dashboard** with statistics
 - **Post management** (Create, Read, Update, Delete, Restore)
 - **Contact form management**
@@ -34,23 +37,27 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 - **Responsive admin interface**
 
 ### 💳 Payment Integration
+
 - **Razorpay** payment gateway
 - **Payment success/failure** handling
 - **Transaction management**
 
 ### 🔔 Real-time Features
+
 - **Laravel Reverb** for WebSocket broadcasting
 - **Real-time contact notifications**
 - **Sweet Alert** notifications
 - **Live updates** in admin panel
 
 ### 🎨 Frontend
+
 - **Tailwind CSS** for styling
 - **Vite** for asset compilation
 - **Responsive design**
 - **Modern UI/UX** with custom themes
 
 ### 🔌 APIs
+
 - **RESTful API endpoints**
 - **Product API** for external integrations
 - **Sanctum** for API authentication
@@ -58,6 +65,7 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 ## 🛠️ Tech Stack
 
 ### Backend
+
 - **Laravel 12** - PHP Framework
 - **Livewire 3** - Full-stack framework
 - **Jetstream** - Authentication scaffolding
@@ -65,22 +73,26 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 - **Reverb** - WebSocket server
 
 ### Frontend
+
 - **Tailwind CSS** - Utility-first CSS framework
 - **Vite** - Build tool and dev server
 - **Alpine.js** - Reactive JavaScript framework
 
 ### Database
+
 - **MySQL/PostgreSQL/SQLite**
 - **Database migrations** and seeders
 - **Eloquent ORM**
 
 ### Third-party Services
+
 - **Cloudinary** - Image hosting and management
 - **Razorpay** - Payment processing
 - **Google OAuth** - Social authentication
 - **Sweet Alert** - Notification library
 
 ### Development Tools
+
 - **Composer** - PHP dependency management
 - **NPM** - Node.js package management
 - **Laravel Pint** - Code styling
@@ -97,22 +109,26 @@ A modern, feature-rich blog application built with Laravel 12, featuring user au
 ## 🚀 Installation & Setup
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/Abhinav8960/blogspot.git
 cd blogspot
 ```
 
 ### 2. Install PHP Dependencies
+
 ```bash
 composer install
 ```
 
 ### 3. Install Node.js Dependencies
+
 ```bash
 npm install
 ```
 
 ### 4. Environment Configuration
+
 ```bash
 cp .env.example .env
 ```
@@ -151,11 +167,13 @@ QUEUE_CONNECTION=database
 ```
 
 ### 5. Generate Application Key
+
 ```bash
 php artisan key:generate
 ```
 
 ### 6. Database Setup
+
 ```bash
 # Run migrations
 php artisan migrate
@@ -165,6 +183,7 @@ php artisan db:seed
 ```
 
 ### 7. Build Assets
+
 ```bash
 # For development
 npm run dev
@@ -174,6 +193,7 @@ npm run build
 ```
 
 ### 8. Start the Application
+
 ```bash
 # Using Laravel's built-in server
 php artisan serve
@@ -239,6 +259,7 @@ REVERB_SCHEME=http
 ```
 
 3. Start Reverb server:
+
 ```bash
 php artisan reverb:start
 ```
@@ -277,18 +298,21 @@ blogspot/
 ## 🎯 Key Features Explained
 
 ### Admin Panel
+
 - **Dashboard**: Overview with statistics and recent activities
 - **Post Management**: Full CRUD operations with soft delete
 - **Contact Management**: View and manage contact form submissions
 - **Real-time Notifications**: Instant alerts for new contacts
 
 ### User Features
+
 - **Registration/Login**: Standard and Google OAuth
 - **Profile Management**: Update profile with avatar
 - **Blog Reading**: Browse and read published posts
 - **Contact Forms**: Submit inquiries to admin
 
 ### Payment System
+
 - **Razorpay Integration**: Secure payment processing
 - **Success/Failure Handling**: Proper transaction feedback
 - **Payment Records**: Track all transactions
@@ -315,15 +339,18 @@ php artisan test --coverage
 ## 📊 API Endpoints
 
 ### Public Endpoints
+
 - `GET /api/products` - Get all products
 - `GET /api/productnews` - Get product news
 
 ### Protected Endpoints (Require Authentication)
+
 - `GET /api/user` - Get authenticated user info
 
 ## 🚀 Deployment
 
 ### Production Checklist
+
 - [ ] Set `APP_ENV=production`
 - [ ] Set `APP_DEBUG=false`
 - [ ] Configure production database
@@ -334,6 +361,7 @@ php artisan test --coverage
 - [ ] Set proper file permissions
 
 ### Environment Variables for Production
+
 ```env
 APP_ENV=production
 APP_DEBUG=false
