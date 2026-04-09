@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Payments\RazorpayController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\auth\SubscriptionController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -49,6 +50,18 @@ Route::post('/contactus', [HomeController::class, 'Contactuscreate'])->name('Con
 Route::post('/submit-quote', [QuoteController::class, 'store'])->name('quote.store');
 // Authentication routes
 require __DIR__ . '/auth.php';
+
+// User Subscription Routes (User Payment)
+Route::middleware(['auth'])
+    ->prefix('subscription')
+    ->name('subscription.')
+    ->group(function () {
+        Route::get('/payment', [SubscriptionController::class, 'showPayment'])->name('payment');
+        Route::post('/process', [SubscriptionController::class, 'processPayment'])->name('process');
+        Route::get('/success', [SubscriptionController::class, 'success'])->name('success');
+        Route::get('/failed', [SubscriptionController::class, 'failed'])->name('failed');
+        Route::post('/verify', [SubscriptionController::class, 'verifyPayment'])->name('verify');
+    });
 
 // Protected routes
 Route::middleware(['auth'])
