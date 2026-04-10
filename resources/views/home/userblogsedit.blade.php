@@ -77,11 +77,9 @@
                         @enderror
 
                         @if($blog->featured_image)
-                        <div class="mt-2">
+                        <div class="d-flex mt-2">
                             <p class="mb-1">Current Image:</p>
-                            <img src="{{ asset('storage/' . $blog->featured_image) }}"
-                                alt="Blog Image"
-                                style="max-width: 200px; height: auto; border-radius: 8px;">
+                            <img src="{{($blog->featured_image) }}" alt="{{ $blog->title }}" style="max-width: 200px; height: auto; border-radius: 8px;">
                         </div>
                         @endif
                     </div>
