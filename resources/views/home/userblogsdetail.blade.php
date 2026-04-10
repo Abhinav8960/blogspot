@@ -113,7 +113,7 @@
                 <div class="col-md-5 mb-4 mt-5">
                     @if($blog->featured_image)
                     <div class="blog-image mb-4">
-                        <img src="{{ asset('storage/' . $blog->featured_image) }}" alt="{{ $blog->title }}">
+                        <img src="{{($blog->featured_image) }}" alt="{{ $blog->title }}">
                     </div>
                     @endif
 
@@ -128,7 +128,7 @@
                         </iframe>
                         @else
                         <video controls>
-                            <source src="{{ asset('storage/' . $blog->featured_video) }}">
+                            <source src="{{ ($blog->featured_video) }}" alt="{{ $blog->title }}">
                             Your browser does not support the video tag.
                         </video>
                         @endif
