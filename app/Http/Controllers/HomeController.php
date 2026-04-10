@@ -232,6 +232,16 @@ class HomeController extends Controller
         return view('home.userblogsdetail', compact('blog'));
     }
 
+    public function userblogspendingforapproval($id)
+    {
+        $blogs = Blog::where('user_id', $id)
+            ->where('status', 'pending')
+            ->orderBy('id', 'desc')
+            ->paginate(6);
+
+        return view('home.userblogspendingforapproval', compact('blogs'));
+    }
+
     public function blogsendforapproval($id)
     {
         $blog = Blog::findOrFail($id);

@@ -16,14 +16,13 @@
     <div class="services_section layout_padding my-posts-section">
         <div class="container">
             <div class="d-flex justify-content-between align-items-center mb-3">
-                <h1 class="services_taital m-0">My Blogs</h1>
+                <h1 class="services_taital m-0">Pending Blogs</h1>
 
-                <a href="{{ route('blogs.create') }}" class="btn btn-warning text-dark">
-                    + Add Blog
-                </a>
-                <a href="{{ route('home.userblogspendingforapproval', Auth::id()) }}" class="btn btn-secondary">
-                    Blogs Pending for Approval
-                </a>
+                <div class="mt-3">
+                    <a href="{{ route('home.userblogs', auth()->id()) }}" class="btn btn-secondary">
+                        Back to My Blogs
+                    </a>
+                </div>
             </div>
             <div class="services_section_2">
                 <div class="row">

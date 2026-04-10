@@ -127,4 +127,5 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/userblogsdetail/{id}', [HomeController::class, 'blogdestroy'])->name('home.blogdestroy');
     Route::get('/userblogsedit/{id}', [HomeController::class, 'blogsedit'])->name('home.blogsedit');
     Route::post('/blogsupdate/{id}', [BlogController::class, 'update'])->name('blogs.update');
+    Route::get('/userblogspendingforapproval/{id}', [HomeController::class, 'userblogspendingforapproval'])->name('home.userblogspendingforapproval');
 });
