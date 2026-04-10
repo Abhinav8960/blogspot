@@ -123,6 +123,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
     Route::get('/userblogs/{userId}', [HomeController::class, 'userBlogs'])->name('home.userblogs');
     Route::get('/userblogsdetail/{id}', [HomeController::class, 'userblogsdetail'])->name('home.userblogsdetail');
-    Route::post('/userblogsdetail/{id}/send-for-approval', [HomeController::class, 'sendforapproval'])->name('home.sendForApproval');
-    Route::delete('/userblogsdetail/{id}', [HomeController::class, 'destroy'])->name('home.destroy');
+    Route::post('/userblogsdetail/{id}/send-for-approval', [HomeController::class, 'blogsendforapproval'])->name('home.blogsendforapproval');
+    Route::delete('/userblogsdetail/{id}', [HomeController::class, 'blogdestroy'])->name('home.blogdestroy');
+    Route::get('/userblogsedit/{id}', [HomeController::class, 'blogsedit'])->name('home.blogsedit');
+    Route::post('/blogsupdate/{id}', [BlogController::class, 'update'])->name('blogs.update');
 });

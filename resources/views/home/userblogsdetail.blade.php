@@ -155,7 +155,7 @@
 
                             @auth
                             @if(auth()->id() == $blog->user_id || auth()->user()->isAdmin())
-                            <a href="{{ auth()->user()->isAdmin() ? route('admin.blogs.index') : route('home.userblogsedit', $blog->id) }}"
+                            <a href="{{ route('home.blogsedit', $blog->id) }}"
                                 class="btn btn-sm btn-outline-dark edit-btn">
                                 <i class="fas fa-edit"></i> Edit
                             </a>
@@ -190,7 +190,7 @@
                         <div class="d-flex action-buttons mt-4">
 
                             @if($blog->status == 'draft' || $blog->status == 'rejected')
-                            <form action="{{ route('home.sendForApproval', $blog->id) }}" method="POST">
+                            <form action="{{ route('home.blogsendforapproval', $blog->id) }}" method="POST">
                                 @csrf
                                 <button type="submit" class="btn btn-warning">
                                     Send for Approval
@@ -198,7 +198,7 @@
                             </form>
                             @endif
 
-                            <form action="{{ route('home.destroy', $blog->id) }}" method="POST"
+                            <form action="{{ route('home.blogdestroy', $blog->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this blog?')">
                                 @csrf
                                 @method('DELETE')

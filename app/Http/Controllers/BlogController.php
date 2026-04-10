@@ -66,7 +66,7 @@ class BlogController extends Controller
 
         Blog::create($data);
 
-        return redirect()->route('welcome')->with('success', 'Blog created successfully!');
+        return redirect()->route('home.userblogs', ['id' => Auth::id()])->with('success', 'Blog created successfully!');
     }
 
     public function show($id)
@@ -95,7 +95,7 @@ class BlogController extends Controller
             return redirect()->route('blogs.index')->with('error', 'Cannot edit approved or rejected blogs');
         }
 
-        return view('blogs.edit', compact('blog'));
+        return view('home.edit', compact('blog'));
     }
 
     public function update(Request $request, $id)
@@ -154,10 +154,10 @@ class BlogController extends Controller
 
         $blog->update($data);
 
-        return redirect()->route('blogs.index')->with('success', 'Blog updated successfully!');
+        return redirect()->route('home.userblogs', ['id' => Auth::id()])->with('success', 'Blog updated successfully!');
     }
 
-   
+
 
     public function sendforapproval($id)
     {

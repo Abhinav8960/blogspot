@@ -228,11 +228,11 @@ class HomeController extends Controller
 
     public function userblogsdetail($id)
     {
-        $blog = Blog::where('user_id', auth()->id())->findOrFail($id);
+        $blog = Blog::where('user_id', Auth::id())->findOrFail($id);
         return view('home.userblogsdetail', compact('blog'));
     }
 
-    public function sendforapproval($id)
+    public function blogsendforapproval($id)
     {
         $blog = Blog::findOrFail($id);
 
@@ -251,7 +251,7 @@ class HomeController extends Controller
         return redirect()->route('home.userblogs', Auth::id())->with('success', 'Blog sent for approval!');
     }
 
-    public function destroy($id)
+    public function blogdestroy($id)
     {
         $blog = Blog::findOrFail($id);
 
@@ -273,5 +273,22 @@ class HomeController extends Controller
         $blog->delete();
 
         return redirect()->route('home.userblogs', Auth::id())->with('success', 'Blog deleted successfully!');
+    }
+
+    public function blogsedit($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        // Check if user owns this blog
+        if ($blog->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Can't edit if approved or rejected
+        if (in_array($blog->status, ['approved', 'rejected'])) {
+            return redirect()->route('blogs.index')->with('error', 'Cannot edit approved or rejected blogs');
+        }
+
+        return view('home.userblogsedit', compact('blog'));
     }
 }

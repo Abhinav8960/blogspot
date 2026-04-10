@@ -13,7 +13,7 @@
 
     <div class="contact_section layout_padding">
         <div class="container">
-            <h1 class="contact_taital">Create Blog</h1>
+            <h1 class="contact_taital">Update Blog</h1>
 
             @if(session('success'))
             <div class="alert alert-success mt-3">
@@ -31,15 +31,16 @@
             </div>
             @endif
 
-            <form novalidate action="{{ route('blogs.store') }}" method="POST" enctype="multipart/form-data" class="contact-form">
+            <form novalidate action="{{ route('blogs.update', $blog->id) }}" method="POST" enctype="multipart/form-data" class="contact-form">
                 @csrf
+                @method('POST')
 
                 <div class="email_text">
 
                     <div class="form-group mb-3">
                         <input type="text"
                             name="title"
-                            value="{{ old('title') }}"
+                            value="{{ old('title', $blog->title) }}"
                             placeholder="Blog Title"
                             class="email-bt @error('title') border-danger @enderror">
                         @error('title')
@@ -51,7 +52,7 @@
                         <textarea name="excerpt"
                             rows="3"
                             placeholder="Short excerpt (optional)"
-                            class="massage-bt @error('excerpt') border-danger @enderror">{{ old('excerpt') }}</textarea>
+                            class="massage-bt @error('excerpt') border-danger @enderror">{{ old('excerpt', $blog->excerpt) }}</textarea>
                         @error('excerpt')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -61,7 +62,7 @@
                         <textarea name="content"
                             rows="8"
                             placeholder="Write your blog content here..."
-                            class="massage-bt @error('content') border-danger @enderror">{{ old('content') }}</textarea>
+                            class="massage-bt @error('content') border-danger @enderror">{{ old('content', $blog->content) }}</textarea>
                         @error('content')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -74,12 +75,21 @@
                         @error('featured_image')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
+
+                        @if($blog->featured_image)
+                        <div class="mt-2">
+                            <p class="mb-1">Current Image:</p>
+                            <img src="{{ asset('storage/' . $blog->featured_image) }}"
+                                alt="Blog Image"
+                                style="max-width: 200px; height: auto; border-radius: 8px;">
+                        </div>
+                        @endif
                     </div>
 
                     <div class="form-group mb-3">
                         <input type="url"
                             name="featured_video"
-                            value="{{ old('featured_video') }}"
+                            value="{{ old('featured_video', $blog->featured_video) }}"
                             placeholder="Featured Video URL (optional)"
                             class="email-bt @error('featured_video') border-danger @enderror">
                         @error('featured_video')
@@ -87,9 +97,15 @@
                         @enderror
                     </div>
 
+                    <div class="d-flex justify-content-center">
+
+                    </div>
+
+
+
                     <div class="btn_main">
                         <button type="submit" class="btn btn-dark">
-                            CREATE BLOG
+                            UPDATE BLOG
                         </button>
                     </div>
                 </div>
