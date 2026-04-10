@@ -82,6 +82,9 @@
                             <x-dropdown-link href="{{ route('home.userposts', auth()->id()) }}">
                                 <p style="color: black!important;">{{ __('Posts') }}</p>
                             </x-dropdown-link>
+                            <x-dropdown-link href="{{ route('home.userblogs', auth()->id()) }}">
+                                <p style="color: black!important;">{{ __('Blogs') }}</p>
+                            </x-dropdown-link>
                             @if(auth()->user()->isAdmin())
                             <x-dropdown-link href="{{ route('admin.dashboard') }}">
                                 <p style="color: black!important;">{{ __('Dashboard') }}</p>

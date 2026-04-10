@@ -3,6 +3,7 @@
 use App\Http\Controllers\Payments\RazorpayController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\auth\SubscriptionController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
@@ -81,6 +82,16 @@ Route::middleware(['auth'])
         Route::delete('/posts/{id}', [PostsController::class, 'delete'])->name('posts.delete');
         Route::patch('/posts/{id}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
+        //blogs
+        Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
+        Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
+        Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
+        Route::get('/blogs/{id}', [BlogController::class, 'view'])->name('blogs.view');
+        Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
+        Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
+        Route::delete('/blogs/{id}', [BlogController::class, 'delete'])->name('blogs.delete');
+        Route::patch('/blogs/{id}/restore', [BlogController::class, 'restore'])->name('blogs.restore');
+
         // Contact
         Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus.index');
         Route::get('/contactus/{id}', [ContactUsController::class, 'view'])->name('contactus.view');
@@ -105,3 +116,13 @@ Route::middleware(['auth'])
             return "cleared";
         });
     });
+
+// User Blog Routes
+Route::middleware(['auth'])->group(function () {
+    Route::get('/userblogs/create', [BlogController::class, 'create'])->name('blogs.create');
+    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
+    Route::get('/userblogs/{userId}', [HomeController::class, 'userBlogs'])->name('home.userblogs');
+    Route::get('/userblogsdetail/{id}', [HomeController::class, 'userblogsdetail'])->name('home.userblogsdetail');
+    Route::post('/userblogsdetail/{id}/send-for-approval', [HomeController::class, 'sendforapproval'])->name('home.sendForApproval');
+    Route::delete('/userblogsdetail/{id}', [HomeController::class, 'destroy'])->name('home.destroy');
+});

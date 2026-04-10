@@ -31,6 +31,11 @@
                             <span>{{ __('My Posts') }}</span>
                         </a>
 
+                        <a href="{{ route('home.userblogs', auth()->id()) }}" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition" style="color: #1f1f1f;">
+                            <i class="fas fa-file-alt text-green-500"></i>
+                            <span>{{ __('My Blogs') }}</span>
+                        </a>
+
                         @if(auth()->user()->isAdmin())
                         <div style="border-top: 1px solid #eee; margin: 4px 0;"></div>
                         <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-2 px-4 py-2 text-sm hover:bg-gray-50 transition" style="color: #1f1f1f;">

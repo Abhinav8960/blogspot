@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\auth\SubscriptionController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PostsController;
 use Illuminate\Support\Facades\Route;
@@ -68,4 +69,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/posts/create', [PostsController::class, 'create'])->name('posts.create');
     Route::post('/posts', [PostsController::class, 'store'])->name('posts.store');
     Route::post('/profile/subscription', [SubscriptionController::class, 'storeSubscription'])->name('profile.subscription.store');
+
+    //blogs 
+    Route::get('/myblogs/{id}', [BlogController::class, 'index'])->name('home.userblogs');
+    Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('home.userblogsedit');
+    Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('home.userblogsupdate');
+    Route::get('/blogs/create', [BlogController::class, 'create'])->name('home.userblogscreate');
 });

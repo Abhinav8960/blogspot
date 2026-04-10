@@ -14,6 +14,7 @@ use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 use App\Services\MailService;
 use App\Mail\ContactFormMail;
+use App\Models\Blog;
 use Illuminate\Support\Facades\Log;
 
 class HomeController extends Controller
@@ -207,5 +208,70 @@ class HomeController extends Controller
             ]);
         }
         return redirect()->route('home.userposts', Auth::id());
+    }
+
+    public function blogs()
+    {
+        $query = Blog::query();
+        $blogs = $query->where('status', 'approved')->orderBy('id', 'desc')->paginate(6);
+        return view('home.blogs-page', compact('blogs'));
+    }
+
+    public function userBlogs($id)
+    {
+        $blogs = Blog::where('user_id', $id)
+            ->orderBy('id', 'desc')
+            ->paginate(6);
+
+        return view('home.userblogs', compact('blogs'));
+    }
+
+    public function userblogsdetail($id)
+    {
+        $blog = Blog::where('user_id', auth()->id())->findOrFail($id);
+        return view('home.userblogsdetail', compact('blog'));
+    }
+
+    public function sendforapproval($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        // Check if user owns this blog
+        if ($blog->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Can only send for approval if draft
+        if ($blog->status !== 'draft') {
+            return redirect()->route('home.userblogs', Auth::id())->with('error', 'Blog is not in draft status');
+        }
+
+        $blog->update(['status' => 'pending']);
+
+        return redirect()->route('home.userblogs', Auth::id())->with('success', 'Blog sent for approval!');
+    }
+
+    public function destroy($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        // Check if user owns this blog
+        if ($blog->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized');
+        }
+
+        // Can't delete if approved
+        if ($blog->status === 'approved') {
+            return redirect()->route('home.userblogs', Auth::id())->with('error', 'Cannot delete approved blogs');
+        }
+
+        // Delete featured image from Cloudinary
+        if ($blog->public_id) {
+            Cloudinary::uploadApi()->destroy($blog->public_id);
+        }
+
+        $blog->delete();
+
+        return redirect()->route('home.userblogs', Auth::id())->with('success', 'Blog deleted successfully!');
     }
 }
