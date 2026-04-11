@@ -71,5 +71,14 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/subscription', [SubscriptionController::class, 'storeSubscription'])->name('profile.subscription.store');
 
     //blogs 
-    
+    Route::get('/myblogs/{id}', [BlogController::class, 'index'])->name('home.userblogs');
+    Route::get('/userblogs/create', [BlogController::class, 'create'])->name('blogs.create');
+    Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
+    Route::get('/userblogs/{userId}', [HomeController::class, 'userBlogs'])->name('home.userblogs');
+    Route::get('/userblogsdetail/{id}', [HomeController::class, 'userblogsdetail'])->name('home.userblogsdetail');
+    Route::post('/userblogsdetail/{id}/send-for-approval', [HomeController::class, 'blogsendforapproval'])->name('home.blogsendforapproval');
+    Route::delete('/userblogsdetail/{id}', [HomeController::class, 'blogdestroy'])->name('home.blogdestroy');
+    Route::get('/userblogsedit/{id}', [HomeController::class, 'blogsedit'])->name('home.blogsedit');
+    Route::post('/blogsupdate/{id}', [BlogController::class, 'update'])->name('blogs.update');
+    Route::get('/userblogspendingforapproval/{id}', [HomeController::class, 'userblogspendingforapproval'])->name('home.userblogspendingforapproval');
 });
