@@ -71,8 +71,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/subscription', [SubscriptionController::class, 'storeSubscription'])->name('profile.subscription.store');
 
     //blogs 
-    Route::get('/myblogs/{id}', [BlogController::class, 'index'])->name('home.userblogs');
-    Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('home.userblogsedit');
-    Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('home.userblogsupdate');
-    Route::get('/blogs/create', [BlogController::class, 'create'])->name('home.userblogscreate');
+    
 });

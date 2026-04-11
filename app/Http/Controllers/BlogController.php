@@ -158,26 +158,6 @@ class BlogController extends Controller
     }
 
 
-
-    public function sendforapproval($id)
-    {
-        $blog = Blog::findOrFail($id);
-
-        // Check if user owns this blog
-        if ($blog->user_id !== Auth::id()) {
-            abort(403, 'Unauthorized');
-        }
-
-        // Can only send for approval if draft
-        if ($blog->status !== 'draft') {
-            return redirect()->route('blogs.index')->with('error', 'Blog is not in draft status');
-        }
-
-        $blog->update(['status' => 'pending']);
-
-        return redirect()->route('blogs.index')->with('success', 'Blog sent for approval!');
-    }
-
     private function generateUniqueSlug($title, $excludeId = null)
     {
         $slug = Str::slug($title);
