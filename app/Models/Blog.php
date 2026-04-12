@@ -85,4 +85,28 @@ class Blog extends Model
             ? asset('storage/' . $this->featured_image)
             : null;
     }
+
+    public function getStatusMetaAttribute()
+    {
+        $statusMeta = [
+            'draft' => ['label' => 'Draft', 'class' => 'badge-secondary'],
+            'pending' => ['label' => 'Pending', 'class' => 'badge-warning'],
+            'approved' => ['label' => 'Approved', 'class' => 'badge-success'],
+            'rejected' => ['label' => 'Rejected', 'class' => 'badge-danger'],
+            'deleted' => ['label' => 'Deleted', 'class' => 'badge-dark'],
+            'restored' => ['label' => 'Restored', 'class' => 'badge-info'],
+            'published' => ['label' => 'Published', 'class' => 'badge-primary'],
+        ];
+
+        return $statusMeta[$this->status] ?? ['label' => ucfirst($this->status), 'class' => 'badge-secondary'];
+    }
+
+    public function getPublishMetaAttribute()
+    {
+        $is_published = [
+            '1' => ['label' => 'Published', 'class' => 'badge-success'],
+            '0' => ['label' => 'Unpublished', 'class' => 'badge-secondary'],
+        ];
+        return $is_published[$this->is_published] ?? ['label' => ucfirst($this->is_published), 'class' => 'badge-secondary'];
+    }
 }

@@ -181,4 +181,92 @@ class BlogController extends Controller
 
         return $slug;
     }
+
+
+    public function adminbloglist()
+    {
+        $query = Blog::query();
+        $blogs = $query->orderBy('id', 'desc')->paginate(6);
+        return view('admin.blogs.index', compact('blogs'));
+    }
+
+    public function adminblogspendingforapproval()
+    {
+        $query = Blog::query();
+        $blogs = $query->where('status', 'pending')->orderBy('id', 'desc')->paginate(6);
+        return view('admin.blogs.pendingblogs', compact('blogs'));
+    }
+
+    public function adminshowblogdetail($id)
+    {
+        $blog = Blog::with('user')->findOrFail($id);
+        return view('admin.blogs.blogdetail', compact('blog'));
+    }
+
+    public function adminblogapprove($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->status = 'approved';
+        if ($blog->status == 'approved') {
+            $blog->approved_by = Auth::id();
+            $blog->approved_at = now();
+        }
+        $blog->save();
+
+        return redirect()->route('admin.blogs.view', ['id' => $blog->id])->with('success', 'Blog approved successfully.');
+    }
+
+    public function adminblogreject($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->status = 'rejected';
+        $blog->save();
+
+        return redirect()->route('admin.blogs.view', ['id' => $blog->id])->with('success', 'Blog rejected successfully.');
+    }
+
+    public function adminblogpublish($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->is_published = 1;
+        $blog->published_at = now();
+        $blog->save();
+
+        return redirect()->route('admin.blogs.view', ['id' => $blog->id])->with('success', 'Blog published successfully.');
+    }
+
+    public function adminblogunpublish($id)
+    {
+        $blog = Blog::findOrFail($id);
+        $blog->is_published = 0;
+        $blog->unpublished_at = now();
+        $blog->save();
+
+        return redirect()->route('admin.blogs.view', ['id' => $blog->id])->with('success', 'Blog unpublished successfully.');
+    }
+
+    public function adminblogdestroy($id)
+    {
+        $blog = Blog::findOrFail($id);
+
+        // // Check if user owns this blog
+        // if ($blog->user_id !== Auth::id()) {
+        //     abort(403, 'Unauthorized');
+        // }
+        $blog->status = 'deleted';
+        $blog->save();
+
+        $blog->delete();
+
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog deleted successfully!');
+    }
+
+    public function adminblogrestore($id)
+    {
+        $blog = Blog::withTrashed()->findOrFail($id);
+        $blog->status = 'restored';
+        $blog->save();
+        $blog->restore();
+        return redirect()->route('admin.blogs.index')->with('success', 'Blog restored successfully!');
+    }
 }

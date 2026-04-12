@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('featured_video')->nullable();
 
             // Approval flow
-            $table->enum('status', ['draft', 'pending', 'approved', 'rejected'])->default('draft');
+            $table->enum('status', ['draft', 'pending', 'approved', 'rejected', 'deleted', 'restored', 'published'])->default('draft');
             $table->foreignId('approved_by')->nullable()->constrained('users')->nullOnDelete();
             $table->timestamp('approved_at')->nullable();
             $table->text('rejection_reason')->nullable();

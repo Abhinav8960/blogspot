@@ -83,14 +83,15 @@ Route::middleware(['auth'])
         Route::patch('/posts/{id}/restore', [PostsController::class, 'restore'])->name('posts.restore');
 
         //blogs
-        Route::get('/blogs', [BlogController::class, 'index'])->name('blogs.index');
-        Route::get('/blogs/create', [BlogController::class, 'create'])->name('blogs.create');
-        Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
-        Route::get('/blogs/{id}', [BlogController::class, 'view'])->name('blogs.view');
-        Route::get('/blogs/edit/{id}', [BlogController::class, 'edit'])->name('blogs.edit');
-        Route::post('/blogs/update/{id}', [BlogController::class, 'update'])->name('blogs.update');
-        Route::delete('/blogs/{id}', [BlogController::class, 'delete'])->name('blogs.delete');
-        Route::patch('/blogs/{id}/restore', [BlogController::class, 'restore'])->name('blogs.restore');
+        Route::get('/blogs', [BlogController::class, 'adminbloglist'])->name('blogs.index');
+        Route::get('/blogs/pendingforapproval', [BlogController::class, 'adminblogspendingforapproval'])->name('blogs.pendingblogs');
+        Route::get('/blogs/{id}', [BlogController::class, 'adminshowblogdetail'])->name('blogs.view');
+        Route::post('/blogs/approve/{id}', [BlogController::class, 'adminblogapprove'])->name('blogs.approve');
+        Route::post('/blogs/reject/{id}', [BlogController::class, 'adminblogreject'])->name('blogs.reject');
+        Route::post('/blogs/publish/{id}', [BlogController::class, 'adminblogpublish'])->name('blogs.publish');
+        Route::post('/blogs/unpublish/{id}', [BlogController::class, 'adminblogunpublish'])->name('blogs.unpublish');
+        Route::delete('/blogs/{id}', [BlogController::class, 'adminblogdestroy'])->name('blogs.delete');
+        Route::patch('/blogs/{id}/restore', [BlogController::class, 'adminblogrestore'])->name('blogs.restore');
 
         // Contact
         Route::get('/contactus', [ContactUsController::class, 'index'])->name('contactus.index');

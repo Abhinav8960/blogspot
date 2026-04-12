@@ -12,6 +12,7 @@
         <li class="active"><a href="{{ route('admin.dashboard') }}"> <i class="icon-home"></i><span>DashBoard</span></a></li>
         <li><a href="{{ route('admin.posts.index') }}"> <i class="icon-grid"></i><span>Posts</span></a></li>
         <li><a href="{{ route('admin.contactus.index') }}"> <i class="icon-padnote"></i> <span>Contacts</span> </a></li>
+        <li><a href="{{ route('admin.blogs.index') }}"> <i class="icon-padnote"></i> <span>Blogs</span> </a></li>
         <li><a href="/"> <i class="icon-website"></i><span>View Website</span></a></li>
         <li><a href="charts.html"> <i class="fa fa-bar-chart"></i><span>Charts</span></a></li>
         <li><a href="#exampledropdownDropdown" aria-expanded="false" data-toggle="collapse"> <i class="icon-windows"></i><span>Example Dropdown</span></a>
