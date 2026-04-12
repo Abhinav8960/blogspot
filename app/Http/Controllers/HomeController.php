@@ -213,16 +213,20 @@ class HomeController extends Controller
     public function blogs()
     {
         $query = Blog::query();
-        $blogs = $query->where('status', 'approved')->orderBy('id', 'desc')->paginate(6);
+        $blogs = $query->where('status', 'published')->orderBy('id', 'desc')->paginate(6);
         return view('home.blogs-page', compact('blogs'));
     }
 
-    public function userBlogs($id)
+    public function userBlogs($id, Request $request)
     {
-        $blogs = Blog::where('user_id', $id)
-            ->orderBy('id', 'desc')
-            ->paginate(6);
+        $query = Blog::where('user_id', $id)
+            ->whereIn('status', ['draft', 'pending', 'approved', 'rejected', 'published']);
 
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        $blogs = $query->orderBy('id', 'desc')->paginate(6)->withQueryString();
         return view('home.userblogs', compact('blogs'));
     }
 

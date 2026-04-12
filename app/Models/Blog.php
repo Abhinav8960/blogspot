@@ -109,4 +109,38 @@ class Blog extends Model
         ];
         return $is_published[$this->is_published] ?? ['label' => ucfirst($this->is_published), 'class' => 'badge-secondary'];
     }
+
+    public function getUserBlogsWithStatus($userId, $status = null)
+    {
+        $query = self::where('user_id', $userId);
+
+        if ($status) {
+            $query->where('status', $status);
+        }
+
+        return $query->orderBy('id', 'desc')->paginate(6);
+    }
+
+    public function getStatusBadge()
+    {
+        return match ($this->status) {
+            'published' => '<button class="btn btn-sm" style="background:#EAF3DE; color:#3B6D11; border:1px solid #639922; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;">
+                            &#10003; Published
+                        </button>',
+
+            'pending' => '<button class="btn btn-sm" style="background:#FAEEDA; color:#854F0B; border:1px solid #BA7517; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;">
+                            &#9679; Pending
+                      </button>',
+
+            'rejected' => '<button class="btn btn-sm" style="background:#FCEBEB; color:#A32D2D; border:1px solid #E24B4A; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;">
+                            &#10007; Rejected
+                       </button>',
+
+            'draft' => '<button class="btn btn-sm" style="background:#F1EFE8; color:#5F5E5A; border:1px solid #888780; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;">
+                        &#9679; Draft
+                    </button>',
+
+            default => '<span class="badge badge-secondary">Unknown</span>',
+        };
+    }
 }

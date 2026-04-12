@@ -71,7 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/profile/subscription', [SubscriptionController::class, 'storeSubscription'])->name('profile.subscription.store');
 
     //blogs 
-    Route::get('/myblogs/{id}', [BlogController::class, 'index'])->name('home.userblogs');
+    Route::get('/myblogs/{id}', [HomeController::class, 'userBlogs'])->name('home.userblogs');
     Route::get('/userblogs/create', [BlogController::class, 'create'])->name('blogs.create');
     Route::post('/blogs', [BlogController::class, 'store'])->name('blogs.store');
     Route::get('/userblogs/{userId}', [HomeController::class, 'userBlogs'])->name('home.userblogs');
