@@ -186,7 +186,7 @@ class BlogController extends Controller
     public function adminbloglist()
     {
         $query = Blog::query();
-        $blogs = $query->orderBy('id', 'desc')->paginate(6);
+        $blogs = $query->withTrashed()->orderBy('id', 'desc')->paginate(6);
         return view('admin.blogs.index', compact('blogs'));
     }
 
@@ -228,6 +228,7 @@ class BlogController extends Controller
     public function adminblogpublish($id)
     {
         $blog = Blog::findOrFail($id);
+        $blog->status = 'published';
         $blog->is_published = 1;
         $blog->published_at = now();
         $blog->save();
@@ -238,8 +239,8 @@ class BlogController extends Controller
     public function adminblogunpublish($id)
     {
         $blog = Blog::findOrFail($id);
+        $blog->status = 'approved';
         $blog->is_published = 0;
-        $blog->unpublished_at = now();
         $blog->save();
 
         return redirect()->route('admin.blogs.view', ['id' => $blog->id])->with('success', 'Blog unpublished successfully.');

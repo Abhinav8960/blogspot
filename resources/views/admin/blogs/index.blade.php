@@ -70,10 +70,10 @@
                         </td>
 
                         <td>
+                            <a href="{{ route('admin.blogs.view', $blog->id) }}" class="btn btn-sm btn-warning">View</a>
 
                             @if(!$blog->deleted_at)
                             <!-- ACTIVE Blog -->
-                            <a href="{{ route('admin.blogs.view', $blog->id) }}" class="btn btn-sm btn-warning">View</a>
 
                             <form action="{{ route('admin.blogs.delete', $blog->id) }}"
                                 method="POST"
