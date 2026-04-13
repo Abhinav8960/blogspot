@@ -147,6 +147,7 @@
                                     @if($blog->status == 'draft') status-draft
                                     @elseif($blog->status == 'pending') status-pending
                                     @elseif($blog->status == 'approved') status-approved
+                                    @elseif($blog->status == 'published') status-published
                                     @elseif($blog->status == 'rejected') status-rejected
                                     @endif">
                                     {{ $blog->status }}
@@ -154,7 +155,7 @@
                             </div>
 
                             @auth
-                            @if(auth()->id() == $blog->user_id || auth()->user()->isAdmin())
+                            @if((auth()->id() == $blog->user_id || auth()->user()->isAdmin()) && ( $blog->status == 'draft' || $blog->status == 'rejected'))
                             <a href="{{ route('home.blogsedit', $blog->id) }}"
                                 class="btn btn-sm btn-outline-dark edit-btn">
                                 <i class="fas fa-edit"></i> Edit
@@ -196,7 +197,7 @@
                                     Send for Approval
                                 </button>
                             </form>
-                            @endif
+
 
                             <form action="{{ route('home.blogdestroy', $blog->id) }}" method="POST"
                                 onsubmit="return confirm('Are you sure you want to delete this blog?')">
@@ -206,7 +207,7 @@
                                     Delete
                                 </button>
                             </form>
-
+                            @endif
                             <a href="{{ route('home.userblogs', auth()->id()) }}" class="btn btn-dark">
                                 Back to My Blogs
                             </a>

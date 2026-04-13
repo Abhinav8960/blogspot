@@ -15,52 +15,79 @@
     <div class="services_section layout_padding my-posts-section">
         <div class="container">
 
-            <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap" style="gap:15px;">
+            <div class="d-flex justify-content-between align-items-center mb-3" style="gap:15px;">
                 <h1 class="services_taital m-0">My Blogs</h1>
 
-                <div class="d-flex align-items-center flex-wrap" style="gap:10px;">
+                <div class="d-flex align-items-center" style="gap:10px;">
 
-                    {{-- Filter Buttons --}}
-                    <a href="{{ route('home.userblogs', Auth::id()) }}"
-                        class="btn {{ request('status') == '' ? 'btn-dark' : 'btn-outline-dark' }}"
-                        style="border-radius:20px; font-size:13px; font-weight:500;">
-                        All
-                    </a>
-
-                    <a href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'published']) }}"
-                        class="btn {{ request('status') == 'published' ? 'btn-dark' : 'btn-outline-dark' }}"
-                        style="border-radius:20px; font-size:13px; font-weight:500;">
-                        ✓ Published
-                    </a>
-
-                    <a href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'pending']) }}"
-                        class="btn {{ request('status') == 'pending' ? 'btn-dark' : 'btn-outline-dark' }}"
-                        style="border-radius:20px; font-size:13px; font-weight:500;">
-                        ● Pending
-                    </a>
-
-                    <a href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'rejected']) }}"
-                        class="btn {{ request('status') == 'rejected' ? 'btn-dark' : 'btn-outline-dark' }}"
-                        style="border-radius:20px; font-size:13px; font-weight:500;">
-                        ✗ Rejected
-                    </a>
-
-                    <a href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'draft']) }}"
-                        class="btn {{ request('status') == 'draft' ? 'btn-dark' : 'btn-outline-dark' }}"
-                        style="border-radius:20px; font-size:13px; font-weight:500;">
-                        ● Draft
-                    </a>
-
-                    <a href="{{ route('blogs.create') }}" class="btn btn-warning text-dark" style="border-radius:20px; font-weight:500;">
+                    <a href="{{ route('blogs.create') }}"
+                        class="btn btn-warning text-dark"
+                        style="border-radius:20px; font-weight:500;">
                         + Add Blog
                     </a>
 
-                    <a href="{{ route('home.userblogspendingforapproval', Auth::id()) }}"
+                    <!-- <a href="{{ route('home.userblogspendingforapproval', Auth::id()) }}"
                         class="btn btn-secondary"
                         style="border-radius:20px; font-weight:500;">
                         Blogs Pending for Approval
-                    </a>
+                    </a> -->
 
+
+                    @php
+                    $status = request('status');
+                    $label = match($status) {
+                    'published' => 'Published',
+                    'pending' => 'Pending',
+                    'rejected' => 'Rejected',
+                    'draft' => 'Draft',
+                    'approved' => 'Approved',
+                    default => 'All Blogs',
+                    };
+                    @endphp
+
+                    <div class="dropdown">
+                        <button class="btn btn-dark dropdown-toggle"
+                            type="button"
+                            id="blogFilterDropdown"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                            style="border-radius:20px; font-size:13px; font-weight:500;">
+                            {{ $label }}
+                        </button>
+
+                        <ul class="dropdown-menu" aria-labelledby="blogFilterDropdown">
+                            <li>
+                                <a class="dropdown-item" href="{{ route('home.userblogs', Auth::id()) }}">
+                                    All Blogs
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'published']) }}">
+                                    Published
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'pending']) }}">
+                                    Pending
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'rejected']) }}">
+                                    Rejected
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'draft']) }}">
+                                    Draft
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('home.userblogs', ['id' => Auth::id(), 'status' => 'approved']) }}">
+                                    Approved
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
 
@@ -102,6 +129,8 @@
     </div>
 
     @include('home.footer')
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 
