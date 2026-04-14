@@ -73,8 +73,9 @@
         }
 
         .status-approved {
-            background: #d4edda;
-            color: #155724;
+            background: #E6F4EA;
+            color: #1E7E34;
+            border: 1px solid #28A745;
         }
 
         .status-rejected {
@@ -96,6 +97,28 @@
 
         .edit-btn i {
             color: #000 !important;
+        }
+
+        .send-btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: inline-block !important;
+            color: #06637a !important;
+        }
+
+        .send-btn i {
+            color: #06637a !important;
+        }
+
+        .delete-btn {
+            opacity: 1 !important;
+            visibility: visible !important;
+            display: inline-block !important;
+            color: #ff0000 !important;
+        }
+
+        .delete-btn i {
+            color: #ff0000 !important;
         }
     </style>
 </head>
@@ -154,14 +177,34 @@
                                 </span>
                             </div>
 
-                            @auth
-                            @if((auth()->id() == $blog->user_id || auth()->user()->isAdmin()) && ( $blog->status == 'draft' || $blog->status == 'rejected'))
-                            <a href="{{ route('home.blogsedit', $blog->id) }}"
-                                class="btn btn-sm btn-outline-dark edit-btn">
-                                <i class="fas fa-edit"></i> Edit
-                            </a>
-                            @endif
-                            @endauth
+                            <div class="d-flex align-items-end">
+                                @auth
+                                @if((auth()->id() == $blog->user_id || auth()->user()->isAdmin()) && ( $blog->status == 'draft' || $blog->status == 'rejected'))
+                                <a href="{{ route('home.blogsedit', $blog->id) }}"
+                                    class="btn btn-sm btn-outline-dark edit-btn">
+                                    <i class="fas fa-edit"></i> Edit
+                                </a>
+
+                                <form action="{{ route('home.blogsendforapproval', $blog->id) }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-outline-dark send-btn">
+                                        <i class="fas fa-send"></i>Send for Approval
+                                    </button>
+                                </form>
+
+
+                                <form action="{{ route('home.blogdestroy', $blog->id) }}" method="POST"
+                                    onsubmit="return confirm('Are you sure you want to delete this blog?')">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-sm btn-outline-dark delete-btn">
+                                        <i class="fas fa-trash"></i>Delete
+                                    </button>
+                                </form>
+
+                                @endif
+                                @endauth
+                            </div>
                         </div>
 
                         <h5>By {{ $blog->user->name ?? 'Unknown' }}</h5>
@@ -189,25 +232,6 @@
                         @auth
                         @if(auth()->id() == $blog->user_id)
                         <div class="d-flex action-buttons mt-4">
-
-                            @if($blog->status == 'draft' || $blog->status == 'rejected')
-                            <form action="{{ route('home.blogsendforapproval', $blog->id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-warning">
-                                    Send for Approval
-                                </button>
-                            </form>
-
-
-                            <form action="{{ route('home.blogdestroy', $blog->id) }}" method="POST"
-                                onsubmit="return confirm('Are you sure you want to delete this blog?')">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger">
-                                    Delete
-                                </button>
-                            </form>
-                            @endif
                             <a href="{{ route('home.userblogs', auth()->id()) }}" class="btn btn-dark">
                                 Back to My Blogs
                             </a>

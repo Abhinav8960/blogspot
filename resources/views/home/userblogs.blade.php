@@ -51,11 +51,11 @@
                             id="blogFilterDropdown"
                             data-bs-toggle="dropdown"
                             aria-expanded="false"
-                            style="border-radius:20px; font-size:13px; font-weight:500;">
+                            style="border-radius:30px; font-size:15px; font-weight:500; height: 40px;">
                             {{ $label }}
                         </button>
 
-                        <ul class="dropdown-menu" aria-labelledby="blogFilterDropdown">
+                        <ul class="dropdown-menu" style="border-radius:30px; background-color: #66b2c5" aria-labelledby="blogFilterDropdown">
                             <li>
                                 <a class="dropdown-item" href="{{ route('home.userblogs', Auth::id()) }}">
                                     All Blogs

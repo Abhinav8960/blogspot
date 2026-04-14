@@ -136,8 +136,8 @@ class Blog extends Model
                             &#10007; Rejected
                        </button>',
 
-            'approved' => '<button class="btn btn-sm" style="background:#F1EFE8; color:#5F5E5A; border:1px solid #888780; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;">
-                        &#9679; Approved
+            'approved' => '<button class="btn btn-sm" style="background:#E7F1FF; color:#084298; border:1px solid #0D6EFD; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;"> 
+                           &#10003; Approved
                     </button>',
 
             'draft' => '<button class="btn btn-sm" style="background:#F1EFE8; color:#5F5E5A; border:1px solid #888780; border-radius:20px; font-size:12px; font-weight:600; padding:4px 12px; cursor:default;">
