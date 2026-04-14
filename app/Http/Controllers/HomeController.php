@@ -221,6 +221,12 @@ class HomeController extends Controller
         $blogs = $query->where('status', 'published')->orderBy('id', 'desc')->paginate(6);
         return view('home.blogs-page', compact('blogs'));
     }
+    public function blogsdetail($id)
+    {
+        $blog = Blog::findOrFail($id);
+        return view('home.blogsdetail', compact('blog'));
+    }
+
 
     public function userBlogs($id, Request $request)
     {
@@ -237,8 +243,12 @@ class HomeController extends Controller
 
     public function userblogsdetail($id)
     {
-        $blog = Blog::where('user_id', Auth::id())->findOrFail($id);
-        return view('home.userblogsdetail', compact('blog'));
+        if (Auth::id()) {
+            $blog = Blog::where('user_id', Auth::id())->findOrFail($id);
+            return view('home.userblogsdetail', compact('blog'));
+        }
+        $blog = Blog::findOrFail($id);
+        return  view('home.blogsdetail', compact('blog'));
     }
 
     public function userblogspendingforapproval($id)

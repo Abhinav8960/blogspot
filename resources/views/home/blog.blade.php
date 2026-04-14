@@ -14,7 +14,7 @@
 
                 @forelse($blogs as $blog)
                 <div class="col-md-4 mb-4">
-                    <a href="{{ route('home.userblogsdetail', $blog->id) }}"
+                    <a href="{{ route('blogsdetail', $blog->id) }}"
                         class="card-link text-decoration-none">
 
                         <div class="post-card">

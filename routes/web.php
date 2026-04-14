@@ -43,7 +43,7 @@ Route::get('/about', [HomeController::class, 'about'])->name('about');
 
 Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
-Route::get('/blogdetails/{id}', [HomeController::class, 'blogdetails'])->name('blogdetails');
+Route::get('/blogsdetail/{id}', [HomeController::class, 'blogsdetail'])->name('blogsdetail');
 
 
 Route::get('/posts', [HomeController::class, 'posts'])->name('posts');
