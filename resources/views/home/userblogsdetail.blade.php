@@ -166,6 +166,7 @@
                             <div>
                                 <h2 class="blog-title mb-2">{{ $blog->title }}</h2>
 
+                                @if(auth()->user()->isAdmin())
                                 <span class="status-badge 
                                     @if($blog->status == 'draft') status-draft
                                     @elseif($blog->status == 'pending') status-pending
@@ -175,10 +176,11 @@
                                     @endif">
                                     {{ $blog->status }}
                                 </span>
+                                @endif
                             </div>
 
                             <div class="d-flex align-items-end">
-                                @auth
+
                                 @if((auth()->id() == $blog->user_id || auth()->user()->isAdmin()) && ( $blog->status == 'draft' || $blog->status == 'rejected'))
                                 <a href="{{ route('home.blogsedit', $blog->id) }}"
                                     class="btn btn-sm btn-outline-dark edit-btn">
@@ -203,14 +205,14 @@
                                 </form>
 
                                 @endif
-                                @endauth
+
                             </div>
                         </div>
 
                         <h5>By {{ $blog->user->name ?? 'Unknown' }}</h5>
 
                         <div class="blog-meta">
-                            Posted on {{ $blog->created_at->format('d M Y') }}
+                            Published on {{ $blog->created_at->format('d M Y') }}
                         </div>
 
                         @if($blog->excerpt)
@@ -229,23 +231,15 @@
                         </div>
                         @endif
 
-                        @auth
-                        @if(auth()->id() == $blog->user_id)
-                        <div class="d-flex action-buttons mt-4">
-                            <a href="{{ route('home.userblogs', auth()->id()) }}" class="btn btn-dark">
-                                Back to My Blogs
-                            </a>
-                        </div>
-                        @else
-                        <a href="{{ route('home') }}" class="btn btn-dark mt-4">
+
+                        @php
+                        $previous = url()->previous();
+                        $fallback = auth()->check() ? route('home.userblogs', auth()->id()) : route('home');
+                        @endphp
+
+                        <a href="{{ $previous != url()->current() ? $previous : $fallback }}" class="btn btn-dark mt-4">
                             ← Go Back
                         </a>
-                        @endif
-                        @else
-                        <a href="{{ route('home') }}" class="btn btn-dark mt-4">
-                            ← Go Back
-                        </a>
-                        @endauth
 
                     </div>
                 </div>

@@ -116,7 +116,7 @@
                     </div>
                     @empty
                     <div class="col-12 text-center">
-                        <p>No blogs found for this status.</p>
+                        <p>No blogs found.</p>
                     </div>
                     @endforelse
                 </div>
