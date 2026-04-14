@@ -314,8 +314,8 @@ class HomeController extends Controller
         }
 
         // Can't edit if approved or rejected
-        if (in_array($blog->status, ['approved', 'rejected'])) {
-            return redirect()->route('blogs.index')->with('error', 'Cannot edit approved or rejected blogs');
+        if (in_array($blog->status, ['approved'])) {
+            return redirect()->route('home.userblogsdetail', $blog->id)->with('error', 'Cannot edit approved blogs');
         }
 
         return view('home.userblogsedit', compact('blog'));

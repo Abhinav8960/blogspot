@@ -142,19 +142,39 @@
 
                     @if($blog->featured_video)
                     <div class="blog-video">
-                        @if(Str::contains($blog->featured_video, ['youtube.com', 'youtu.be']))
+
+                        @php
+                        $videoUrl = $blog->featured_video;
+
+                        // Convert normal YouTube URL to embed
+                        if(Str::contains($videoUrl, 'youtube.com/watch?v=')) {
+                        $videoId = explode('v=', $videoUrl)[1];
+                        $videoId = explode('&', $videoId)[0];
+                        $videoUrl = "https://www.youtube.com/embed/" . $videoId;
+                        }
+
+                        if(Str::contains($videoUrl, 'youtu.be')) {
+                        $videoId = basename($videoUrl);
+                        $videoUrl = "https://www.youtube.com/embed/" . $videoId;
+                        }
+                        @endphp
+
+                        @if(Str::contains($videoUrl, 'youtube.com/embed'))
                         <iframe
-                            src="{{ $blog->featured_video }}"
+                            src="{{ $videoUrl }}"
+                            width="100%"
                             height="300"
                             frameborder="0"
                             allowfullscreen>
                         </iframe>
+
                         @else
-                        <video controls>
-                            <source src="{{ ($blog->featured_video) }}" alt="{{ $blog->title }}">
+                        <video controls width="100%">
+                            <source src="{{ $videoUrl }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video>
                         @endif
+
                     </div>
                     @endif
                 </div>
