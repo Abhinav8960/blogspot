@@ -65,7 +65,7 @@
     }
 
     .home-blog-title {
-        font-size: 38px;
+        font-size: 40px;
         font-weight: 700;
         margin-bottom: 5px;
     }
@@ -108,7 +108,7 @@
 
     /* Blog page background fix */
     .blog_section.home-blog-section {
-        background-color: #dfdfdf !important;
+        background-color: #d3d2d2 !important;
     }
 
     /* Container ka white bg hatao (important) */

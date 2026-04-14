@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <base href="/public">
     @include('home.homecss')
@@ -17,4 +18,5 @@
     @include('home.footer')
 
 </body>
+
 </html>

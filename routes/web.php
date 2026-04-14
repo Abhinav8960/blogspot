@@ -40,7 +40,11 @@ Route::get('/', [HomeController::class, 'homepage'])->name('welcome');
 Route::get('/home', [HomeController::class, 'homepage'])->name('home');
 
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+
+Route::get('/blogs', [HomeController::class, 'blogs'])->name('blogs');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('/blogdetails/{id}', [HomeController::class, 'blogdetails'])->name('blogdetails');
+
 
 Route::get('/posts', [HomeController::class, 'posts'])->name('posts');
 Route::get('/post', [HomeController::class, 'post'])->name('post');

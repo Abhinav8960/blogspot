@@ -47,7 +47,12 @@ class HomeController extends Controller
             ->limit(3)
             ->get();
 
-        return view('home.homepage', compact('posts'));
+        $blogs = Blog::where('status', 'published')
+            ->orderBy('created_at', 'desc')
+            ->limit(3)
+            ->get();
+
+        return view('home.homepage', compact(['posts', 'blogs']));
     }
 
     public function about()
@@ -57,7 +62,7 @@ class HomeController extends Controller
 
     public function blog()
     {
-        return view('home.blog-page');
+        return view('home.blog');
     }
 
     public function post()

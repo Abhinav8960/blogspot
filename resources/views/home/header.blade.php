@@ -12,7 +12,7 @@
                        <ul style="display: flex; list-style: none; margin: 0; padding: 0 40px; width: 100%; justify-content: space-between; max-width: 1100px; margin: 0 auto;">
                            <li><a href="{{ url('/') }}">Home</a></li>
                            <li><a href="{{ route('about') }}">About</a></li>
-                           <li><a href="{{ route('blog') }}">Blog</a></li>
+                           <li><a href="{{ route('blogs') }}">Blog</a></li>
                            <li><a href="{{ route('posts') }}">Post</a></li>
                            <li><a href="{{ route('contactus') }}">Contact us</a></li>
                            @if (Route::has('login'))
